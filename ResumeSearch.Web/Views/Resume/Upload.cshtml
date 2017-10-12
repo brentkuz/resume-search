@@ -1,0 +1,27 @@
+﻿@model ResumeSearch.Web.Models.UploadVM
+
+
+<form>
+    <div class="row" style="margin-top:30px;">
+        <span class="col-sm-6">
+            @Html.TextBoxFor(m => m.Content, new { id = "fu-my-simple-upload", type = "file" })
+        </span>
+        <span class="col-sm-6">
+            @Html.TextAreaFor(m => m.Description, new { name = "Description", @class = "form-control", placeholder = "Description..." })
+        </span>
+    </div>
+    <div class="row">
+        <span class="col-sm-12">
+            <button class="btn" id="hl-start-upload">Start upload</button>
+        </span>
+    </div>
+</form>
+
+
+
+
+<script type="text/javascript">
+    my.upload.init();
+</script>
+
+
