@@ -22,15 +22,12 @@ namespace ResumeSearch.Web.Core.Logic.Services
     {
         private bool disposed = false;
         private IUnitOfWork uow;
-        private IModelValidator validator;
-        public AccountService() : this(new UnitOfWork(), new ModelValidator())
+        public AccountService() : this(new UnitOfWork())
         {                
         }
-        public AccountService(IUnitOfWork uow, IModelValidator validator)
+        public AccountService(IUnitOfWork uow)
         {
             this.uow = uow;
-            this.validator = validator;
-            
         }
         public UserPrincipal GetUserByUsername(string username)
         {

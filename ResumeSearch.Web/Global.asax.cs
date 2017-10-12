@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Practices.Unity.Mvc;
+using ResumeSearch.Web.Core.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +20,10 @@ namespace ResumeSearch.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //Unity
+            var container = new UnityContainerFactory().GetContainer();
+            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }
 }
