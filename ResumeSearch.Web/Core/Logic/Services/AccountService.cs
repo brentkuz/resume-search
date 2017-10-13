@@ -22,9 +22,6 @@ namespace ResumeSearch.Web.Core.Logic.Services
     {
         private bool disposed = false;
         private IUnitOfWork uow;
-        public AccountService() : this(new UnitOfWork())
-        {                
-        }
         public AccountService(IUnitOfWork uow)
         {
             this.uow = uow;
@@ -42,9 +39,8 @@ namespace ResumeSearch.Web.Core.Logic.Services
         }
         public bool CheckPasswordAvailable(string password)
         {
-            //var user = uow.UserRepository.GetUserByPassword(SecurityHelpers.EncryptPassword(password));
-            //return user == null;
-            return true;
+            var user = uow.UserRepository.GetUserByPassword(SecurityHelpers.EncryptPassword(password, SecurityHelpers.CreateSalt()));
+            return user == null;
         }
         public bool AddUser(UserPrincipal user)
         {  

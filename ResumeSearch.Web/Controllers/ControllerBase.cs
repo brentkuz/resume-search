@@ -10,9 +10,6 @@ namespace ResumeSearch.Web.Controllers
     public class ControllerBase : Controller
     {
         protected ILogger logger;
-        public ControllerBase() : this(new Logger())
-        {
-        }
         public ControllerBase(ILogger logger)
         {
             this.logger = logger;

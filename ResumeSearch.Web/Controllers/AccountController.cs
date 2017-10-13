@@ -18,10 +18,8 @@ namespace ResumeSearch.Web.Controllers
         private AppMembershipProvider provider;
         private IAccountService accountServ;
 
-        public AccountController() : this(new AccountService())
-        {
-        }
-        public AccountController(IAccountService accountServ)
+      
+        public AccountController(IAccountService accountServ, ILogger logger) : base(logger)
         {
             provider = (AppMembershipProvider)Membership.Provider;
             this.accountServ = accountServ;
@@ -148,6 +146,13 @@ namespace ResumeSearch.Web.Controllers
         public ActionResult ValidatePassword(string password)
         {
             return Json(new { available = accountServ.CheckPasswordAvailable(password) });
+        }
+
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            accountServ.Dispose();
         }
     }
 }

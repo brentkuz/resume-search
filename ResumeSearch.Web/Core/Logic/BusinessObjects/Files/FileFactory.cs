@@ -21,9 +21,6 @@ namespace ResumeSearch.Web.Core.Logic.BusinessObjects.Files
         private IFilePreprocessFactory preprocessFactory;
         private IDocumentReaderFactory readerFactory;
 
-        public FileFactory() : this(new FilePreprocessFactory(), new DocumentReaderFactory())
-        {
-        }
         public FileFactory(IFilePreprocessFactory preprocessFactory, IDocumentReaderFactory readerFactory)
         {
             this.preprocessFactory = preprocessFactory;

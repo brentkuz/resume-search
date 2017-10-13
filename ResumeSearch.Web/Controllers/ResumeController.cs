@@ -10,12 +10,8 @@ namespace ResumeSearch.Web.Controllers
     public class ResumeController : ControllerBase
     {
         private IResumeService resumeService;
-
-        public ResumeController() : this(new ResumeService())
-        {
-
-        }
-        public ResumeController(IResumeService resumeService)
+        
+        public ResumeController(IResumeService resumeService, ILogger logger) : base(logger)
         {
             this.resumeService = resumeService;
         }
@@ -30,7 +26,7 @@ namespace ResumeSearch.Web.Controllers
             }
             catch(Exception ex)
             {
-                logger.Log(LogType.Error, "Get Resumes Failed", ex);
+                logger.Log(LogType.Error, "Get resumes failed", ex);
                 var vm = new ResumeListVM();
                 vm.Notification.Message = "Unable to retrieve your resumes.";
                 vm.Notification.Type = NotificationType.Error;
@@ -39,25 +35,36 @@ namespace ResumeSearch.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetUpload()
+        public ActionResult GetUpload(string message = null, bool success = true)
         {
             var vm = new UploadVM();
+            if (message != null)
+                vm.Notification = new NotificationVM(message, success ? NotificationType.Success : NotificationType.Info);
             return PartialView("~/Views/Resume/Upload.cshtml", vm);
         }
         [HttpPost]
         public ActionResult Upload()
         {
-            HttpPostedFileBase myFile = Request.Files[0];
-            var title = myFile.FileName;
-            var desc = Request.Form["Description"];
-            bool isUploaded = true;
-            string message = "File upload success";
-           
-            if (myFile != null)
+            try
             {
-                resumeService.UploadResume(User.Identity.Name, title, desc, myFile);
+                HttpPostedFileBase myFile = Request.Files[0];
+                var title = myFile.FileName;
+                var desc = Request.Form["Description"];
+                bool isUploaded = true;
+                string message = "Success";
+
+                if (myFile != null)
+                {
+                    isUploaded = resumeService.UploadResume(User.Identity.Name, title, desc, myFile);
+                }
+
+                return Json(new { isUploaded = isUploaded, message = message }, "text/html");
             }
-            return Json(new { isUploaded = isUploaded, message = message }, "text/html");
+            catch(Exception ex)
+            {
+                logger.Log(LogType.Error, "Resume upload failed", ex);
+                return Json(new { isUploaded = false, message = "Upload failed." }, "text/html");
+            }
         }
         [HttpGet]
         public ActionResult Download(int id)
@@ -70,6 +77,12 @@ namespace ResumeSearch.Web.Controllers
             {
                 return null;
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            resumeService.Dispose();
         }
     }
 }

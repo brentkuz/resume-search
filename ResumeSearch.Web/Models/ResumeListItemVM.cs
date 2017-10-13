@@ -15,7 +15,7 @@ namespace ResumeSearch.Web.Models
         {
             Id = resume.Id;
             Title = resume.Title;
-            UploadDate = resume.Created.ToString("MM/dd/yyyy");
+            UploadDate = ((DateTime)resume.Created).ToString("MM/dd/yyyy");
         }
         public int Id { get; set; }
         public string Title { get; set; }

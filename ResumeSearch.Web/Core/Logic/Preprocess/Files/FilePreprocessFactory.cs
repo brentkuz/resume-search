@@ -15,10 +15,7 @@ namespace ResumeSearch.Web.Core.Logic.Preprocess.Files
     public class FilePreprocessFactory : IFilePreprocessFactory
     {
         private ITextProcessor textProcessor;
-
-        public FilePreprocessFactory() : this(new TextProcessor())
-        {
-        }
+        
         public FilePreprocessFactory(ITextProcessor textProcessor)
         {
             this.textProcessor = textProcessor;

@@ -1,4 +1,5 @@
 ﻿
+using ResumeSearch.Web.Core.Data;
 using ResumeSearch.Web.Core.Logic.Services;
 using System;
 using System.Collections.Generic;
@@ -121,30 +122,31 @@ namespace ResumeSearch.Web.Security
 
 
         public UserPrincipal User { get; private set; }
-        private IAccountService service;
-        public AppMembershipProvider() : this(new AccountService())
+        
+
+        public AppMembershipProvider()
         {
-        }
-        public AppMembershipProvider(IAccountService service)
-        {
-            this.service = service;
         }
 
         public override bool ValidateUser(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return false;
-            var user = service.GetUserByUsername(username);
-            var hash = SecurityHelpers.EncryptPassword(password, user.Salt);
-           
-            if (user == null)
-                return false;
-            if (user.Password == hash)
+            using (var uow = new UnitOfWork())
+            using (var service = new AccountService(uow))
             {
-                User = user; 
-                return true;
+                var user = service.GetUserByUsername(username);
+                var hash = SecurityHelpers.EncryptPassword(password, user.Salt);
+
+                if (user == null)
+                    return false;
+                if (user.Password == hash)
+                {
+                    User = user;
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
 
         public bool CreateUser(UserPrincipal user)
@@ -152,15 +154,20 @@ namespace ResumeSearch.Web.Security
             var salt = SecurityHelpers.CreateSalt();
             user.Password = SecurityHelpers.EncryptPassword(user.Password, salt);
             user.Salt = salt;
-            var success = service.AddUser(user);
-            if(success)
+
+            using (var uow = new UnitOfWork())
+            using (var service = new AccountService(uow))
             {
-                User = user;
-                return true;
+                var success = service.AddUser(user);
+                if (success)
+                {
+                    User = user;
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
 
-
+        
     }
 }

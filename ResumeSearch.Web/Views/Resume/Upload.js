@@ -28,17 +28,16 @@ my.upload = (function () {
             },
             done: function (event, data) {
                 if (data.result.isUploaded) {
-
+                    $.get("Resume/GetUpload?message=Success").then(function (resp) {
+                        $("#resumeUpload").html(resp);
+                    })
                 }
                 else {
-
-                }
-                alert(data.result.message);
+                    alert(data.result.message);
+                }          
             },
             fail: function (event, data) {
-                if (data.files[0].error) {
-                    alert(data.files[0].error);
-                }
+                console.log("Upload failed");
             }
         });
     }

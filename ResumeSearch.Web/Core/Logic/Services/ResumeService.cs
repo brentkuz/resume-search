@@ -16,18 +16,14 @@ namespace ResumeSearch.Web.Core.Logic.Services
     {
         List<Resume> GetAllForUser(string username);
         bool UploadResume(string username, string title, string description, HttpPostedFileBase content);
-
+        bool DeleteResume(string username, int id);
     }
     public class ResumeService : IResumeService
     {
         private bool disposed = false;
         private IUnitOfWork uow;
         private IFileFactory fileFactory;
-
-        public ResumeService() 
-            : this(new UnitOfWork(), new FileFactory())
-        {
-        }
+       
         public ResumeService(IUnitOfWork uow, IFileFactory fileFactory)
         {
             this.uow = uow;
@@ -66,13 +62,16 @@ namespace ResumeSearch.Web.Core.Logic.Services
                 words.Add(new Keyword() { Word = w.ToString() });
             }
             var resume = new Resume(title, description, words, bytes, content.ContentType);
-            var user = uow.UserRepository.GetUserByUsername(username);
-
-            user.Resumes.Add(resume);
+     
+            resume.User = uow.UserRepository.GetUserByUsername(username);
             
-            //TODO: Save user graphs
+            uow.ResumeRepository.InsertResume(resume);
+            return uow.Save();
+        }
 
-            return true;
+        public bool DeleteResume(string username, int id)
+        {
+            throw new NotImplementedException();
         }
 
         protected void Dispose(bool disposing)
@@ -87,5 +86,7 @@ namespace ResumeSearch.Web.Core.Logic.Services
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+
     }
 }

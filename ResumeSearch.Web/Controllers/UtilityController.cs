@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ResumeSearch.Web.Core.Utility;
 
 namespace ResumeSearch.Web.Controllers
 {
-    public class UtilityController : Controller
+    public class UtilityController : ControllerBase
     {
+        public UtilityController(ILogger logger) : base(logger)
+        {
+        }
+
         // GET: Utility
         [HttpGet]
         public ActionResult Error(string message)

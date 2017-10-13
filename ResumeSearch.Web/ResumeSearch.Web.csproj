@@ -229,6 +229,10 @@
     <Compile Include="Migrations\201710110409399_Added_Resume_Description.Designer.cs">
       <DependentUpon>201710110409399_Added_Resume_Description.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710130330231_NullableDateTimes.cs" />
+    <Compile Include="Migrations\201710130330231_NullableDateTimes.Designer.cs">
+      <DependentUpon>201710130330231_NullableDateTimes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ResumeListItemVM.cs" />
     <Compile Include="Models\ResumeListVM.cs" />
     <Compile Include="Models\UploadVM.cs" />
@@ -358,6 +362,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710110409399_Added_Resume_Description.resx">
       <DependentUpon>201710110409399_Added_Resume_Description.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710130330231_NullableDateTimes.resx">
+      <DependentUpon>201710130330231_NullableDateTimes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

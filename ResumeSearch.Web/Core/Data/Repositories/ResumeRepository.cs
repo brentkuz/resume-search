@@ -9,7 +9,7 @@ namespace ResumeSearch.Web.Core.Data.Repositories
 {
     public interface IResumeRepository
     {
-        bool InsertResume(Resume resume);
+        void InsertResume(Resume resume);
         List<Resume> GetAllForUser(string username);
     }
     public class ResumeRepository : RepositoryBase, IResumeRepository
@@ -24,9 +24,10 @@ namespace ResumeSearch.Web.Core.Data.Repositories
                 .OrderByDescending(o => o.Created).ToList();
         }
 
-        public bool InsertResume(Resume resume)
+        public void InsertResume(Resume resume)
         {
-            return true;
+            base.Insert(resume);
+            context.Resumes.Add(resume);
         }
     }
 }

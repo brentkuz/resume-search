@@ -14,14 +14,6 @@ namespace ResumeSearch.Web.Core.Logic.NLP
     }
     public class TextProcessor : ITextProcessor
     {
-        protected string Stem(string word)
-        {
-            return word;
-        }
-        protected string CleanWord(string word)
-        {
-            return Regex.Replace(word.Trim().ToLower(), @"[^\w\s]", "");
-        }
         public string ProcessWord(string word)
         {
             return Stem(CleanWord(word));
@@ -30,5 +22,15 @@ namespace ResumeSearch.Web.Core.Logic.NLP
         {
             return text.Split(null).ToList();
         }
+
+        protected string Stem(string word)
+        {
+            return word;
+        }
+        protected string CleanWord(string word)
+        {
+            return Regex.Replace(word.Trim().ToLower(), @"[^\w\s]", "");
+        }
+
     }
 }

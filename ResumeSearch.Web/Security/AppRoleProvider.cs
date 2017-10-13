@@ -1,4 +1,5 @@
-﻿using ResumeSearch.Web.Core.Logic.BusinessObjects;
+﻿using ResumeSearch.Web.Core.Data;
+using ResumeSearch.Web.Core.Logic.BusinessObjects;
 using ResumeSearch.Web.Core.Logic.Services;
 using System;
 using System.Collections.Generic;
@@ -10,23 +11,17 @@ namespace ResumeSearch.Web.Security
 {
     public class AppRoleProvider : RoleProvider
     {
-        private IAccountService service;
-        public AppRoleProvider() : this(new AccountService())
-        {
-
-        }
-        public AppRoleProvider(IAccountService service)
-        {
-            this.service = service;
-        }
-
         public override bool IsUserInRole(string username, string roleName)
         {
-            UserPrincipal user = service.GetUserByUsername(username);
-            if (user != null)
-                return user.IsInRole(roleName);
-            else
-                return false;
+            using (var uow = new UnitOfWork())
+            using (var service = new AccountService(uow))
+            {
+                UserPrincipal user = service.GetUserByUsername(username);
+                if (user != null)
+                    return user.IsInRole(roleName);
+                else
+                    return false;
+            }
         }
         public override string ApplicationName
         {
@@ -55,8 +50,12 @@ namespace ResumeSearch.Web.Security
         }
         public override string[] GetRolesForUser(string username)
         {
-            UserPrincipal user = service.GetUserByUsername(username);    
-            return new string[] { user.Role.ToString() };
+            using (var uow = new UnitOfWork())
+            using (var service = new AccountService(uow))
+            {
+                UserPrincipal user = service.GetUserByUsername(username);
+                return new string[] { user.Role.ToString() };
+            }
         }
         public override string[] GetUsersInRole(string roleName)
         {

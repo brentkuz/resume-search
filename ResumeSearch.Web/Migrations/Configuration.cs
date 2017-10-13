@@ -1,6 +1,9 @@
 namespace ResumeSearch.Web.Migrations
 {
+    using ResumeSearch.Web.Core.Data;
     using ResumeSearch.Web.Core.Data.Entities;
+    using ResumeSearch.Web.Core.Logic.Services;
+    using ResumeSearch.Web.Security;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -21,7 +24,14 @@ namespace ResumeSearch.Web.Migrations
             context.Database.ExecuteSqlCommand("sp_MSForEachTable 'IF OBJECT_ID(''?'') NOT IN (ISNULL(OBJECT_ID(''[dbo].[__MigrationHistory]''),0)) DELETE FROM ?'");
             context.Database.ExecuteSqlCommand("EXEC sp_MSForEachTable 'ALTER TABLE ? CHECK CONSTRAINT ALL'");
 
-            var lines = File.ReadAllLines(@"C:\Users\brentkuz\Documents\Visual Studio 2017\Projects\KeywordSearch\ResumeSearch.Web\stopwords.txt");
+
+            //user            
+            var memb = new AppMembershipProvider();
+            memb.CreateUser(new UserPrincipal("brentkuz", "btk1987", "brentkuzmanich@gmail.com"));
+           
+
+            //stopwords
+            var lines = File.ReadAllLines(@"C:\Users\brentkuz\Source\Repos\resume-search\ResumeSearch.Web\stopwords.txt");
             int i = 1;
             foreach (var l in lines)
                 context.Stopwords.Add(new Stopword() { Id = i++, Word = l, Created = DateTime.Now, Modified = DateTime.Now });
