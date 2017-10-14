@@ -1,6 +1,10 @@
 ﻿@model ResumeSearch.Web.Models.UploadVM
 
-@Html.Partial("~/Views/Shared/NotificationPartial.cshtml", Model.Notification)
+<div class="row">
+    <div class="col-sm-12">
+        @Html.Partial("~/Views/Shared/NotificationPartial.cshtml", Model.Notification)
+    </div>
+</div>
 <form>
     <div class="row" style="margin-top:30px;">
         <span class="col-sm-6">

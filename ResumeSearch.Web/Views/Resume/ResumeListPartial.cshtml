@@ -1,40 +1,44 @@
 ﻿@model ResumeSearch.Web.Models.ResumeListVM
 
 @Html.Partial("~/Views/Shared/NotificationPartial.cshtml", Model.Notification)
-<table class="table">
-    <tr>
-        <th>
-            <input type="checkbox" id="allResumesChk"/>
-        </th>
-        <th>
-            Title
-        </th>
-        <th>
-            Date
-        </th>
-        <th>
-            Description
-        </th>
-        <th></th>
-    </tr>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table">
+            <tr>
+                <th>
+                    <input type="checkbox" id="allResumesChk" />
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Description
+                </th>
+                <th></th>
+            </tr>
 
-@foreach (var item in Model.Resumes) {
-    <tr>
-        <td>
-            <input type="checkbox" class="resumeChk" onchange="my.resumeListPartial.check(this, @item.Id)" data-id="@item.Id"/>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UploadDate)
-        </td>
-        <td>
-            @CustomHelpers.DescriptionDropdown(item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("View", "Download", "Resume", new { id=item.Id }, null) | 
-            @Ajax.ActionLink("Delete", "Delete", "Resume", new { id=item.Id },
+            @foreach (var item in Model.Resumes)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" class="resumeChk" onchange="my.resumeListPartial.check(this, @item.Id)" data-id="@item.Id" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UploadDate)
+                    </td>
+                    <td>
+                        <span class="descDropSpan">Show</span>
+                        <div class="descDropDiv">@item.Description</div>
+                    </td>
+                    <td>
+                        @Html.ActionLink("View", "Download", "Resume", new { id = item.Id }, null) |
+                        @Ajax.ActionLink("Delete", "Delete", "Resume", new { id = item.Id },
                new AjaxOptions()
                {
                    HttpMethod = "DELETE",
@@ -42,14 +46,16 @@
                    UpdateTargetId = "resumeList",
                    OnBegin = "my.utility.block('#resumeList', true)",
                    OnComplete = "my.utility.block('#resumeList', false)"
-               }, 
+               },
                null)
-            
-        </td>
-    </tr>
-}
-    
-</table>
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
 
 <script type="text/javascript">
     my.resumeListPartial.init();

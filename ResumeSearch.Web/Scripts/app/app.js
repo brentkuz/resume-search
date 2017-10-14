@@ -3,7 +3,13 @@
 window.my = window.my || {};
 
 //setup
+//jQuery
+(function ($) {
+    $.fn.clickSummary = function () {
+        $(this).click(function () { alert(); });
+    }
 
+})(jQuery);
 
 
 

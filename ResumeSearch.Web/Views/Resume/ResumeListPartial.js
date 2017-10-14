@@ -4,13 +4,15 @@ my.resumeListPartial = (function (util) {
     if (!util)
         console.log("my.utility is not loaded");
 
+
+
     //selected items
     var checked = [];
 
     function init() {
         $("#allResumesChk").change(function () {
             checked = [];
-            if (this.checked == true) {                
+            if (this.checked == true) {
                 //add all
                 $(".resumeChk").each((i, e) => {
                     checked.push(e.dataset.id);
@@ -19,7 +21,21 @@ my.resumeListPartial = (function (util) {
                 //remove all                
                 $(".resumeChk").prop("checked", false);
             }
-        })
+        });
+
+        $(".descDropDiv").hide();
+        $(".descDropSpan").text("▼").click(function () {
+            var targ = $(this).parent().find("div");
+            if ($(targ).is(":visible")) {
+                $(this).text("▼");
+                $(targ).slideUp(200);
+            } else {
+                $(this).text("▲");
+                $(targ).slideDown(200);
+            }
+        });
+        
+
     };
     //get data from server
     function getList() {
@@ -52,7 +68,8 @@ my.resumeListPartial = (function (util) {
     return {
         init: init,
         getList: getList,
-        check: check
+        check: check,
+        selectedResumes: checked
     };
 
 })(my.utility);
