@@ -4,10 +4,16 @@
 <table class="table">
     <tr>
         <th>
+            <input type="checkbox" id="allResumesChk"/>
+        </th>
+        <th>
             Title
         </th>
         <th>
             Date
+        </th>
+        <th>
+            Description
         </th>
         <th></th>
     </tr>
@@ -15,16 +21,36 @@
 @foreach (var item in Model.Resumes) {
     <tr>
         <td>
+            <input type="checkbox" class="resumeChk" onchange="my.resumeListPartial.check(this, @item.Id)" data-id="@item.Id"/>
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UploadDate)
         </td>
         <td>
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @CustomHelpers.DescriptionDropdown(item.Description)
+        </td>
+        <td>
+            @Html.ActionLink("View", "Download", "Resume", new { id=item.Id }, null) | 
+            @Ajax.ActionLink("Delete", "Delete", "Resume", new { id=item.Id },
+               new AjaxOptions()
+               {
+                   HttpMethod = "DELETE",
+                   InsertionMode = InsertionMode.Replace,
+                   UpdateTargetId = "resumeList",
+                   OnBegin = "my.utility.block('#resumeList', true)",
+                   OnComplete = "my.utility.block('#resumeList', false)"
+               }, 
+               null)
+            
         </td>
     </tr>
 }
     
 </table>
 
+<script type="text/javascript">
+    my.resumeListPartial.init();
+</script>

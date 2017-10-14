@@ -11,14 +11,20 @@ namespace ResumeSearch.Web
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery.unobtrusive-ajax.js",
-                        "~/Scripts/jquery.validate.unobtrusive.js"));
+                        "~/Scripts/jquery.validate.unobtrusive.js",
+                        "~/Scripts/jquery.ui.widget.js",
+                        "~/Scripts/jquery.fileupload.js",
+                        "~/Scripts/jquery.iframe-transport.js",
+                        "~/Scripts/blockUI.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                         "~/Scripts/app/app.js",
-                        "~/Views/Account/CreateUser.js"));
+                        "~/Views/Account/CreateUser.js",
+                        "~/Views/Resume/UploadPartial.js",
+                        "~/Views/Resume/ResumeListPartial.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.

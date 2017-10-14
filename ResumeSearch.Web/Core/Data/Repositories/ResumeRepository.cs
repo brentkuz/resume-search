@@ -9,8 +9,10 @@ namespace ResumeSearch.Web.Core.Data.Repositories
 {
     public interface IResumeRepository
     {
-        void InsertResume(Resume resume);
         List<Resume> GetAllForUser(string username);
+        Resume GetById(int id);
+        void InsertResume(Resume resume);
+        void DeleteResume(Resume resume);
     }
     public class ResumeRepository : RepositoryBase, IResumeRepository
     {
@@ -24,10 +26,20 @@ namespace ResumeSearch.Web.Core.Data.Repositories
                 .OrderByDescending(o => o.Created).ToList();
         }
 
+        public Resume GetById(int id)
+        {
+            return context.Resumes.Find(id);
+        }
+
         public void InsertResume(Resume resume)
         {
             base.Insert(resume);
             context.Resumes.Add(resume);
+        }
+
+        public void DeleteResume(Resume resume)
+        {
+            context.Resumes.Remove(resume);
         }
     }
 }

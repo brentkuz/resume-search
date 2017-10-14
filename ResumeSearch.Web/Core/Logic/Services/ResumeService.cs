@@ -15,6 +15,7 @@ namespace ResumeSearch.Web.Core.Logic.Services
     public interface IResumeService : IDisposable
     {
         List<Resume> GetAllForUser(string username);
+        Resume GetResume(string username, int id);
         bool UploadResume(string username, string title, string description, HttpPostedFileBase content);
         bool DeleteResume(string username, int id);
     }
@@ -33,6 +34,14 @@ namespace ResumeSearch.Web.Core.Logic.Services
         public List<Resume> GetAllForUser(string username)
         {
             return uow.ResumeRepository.GetAllForUser(username);
+        }
+
+        public Resume GetResume(string username, int id)
+        {
+            var res = uow.ResumeRepository.GetById(id);
+            if (res == null || res.User.Username != username)
+                throw new UnauthorizedAccessException("Invalid resume id for user: " + username);
+            return res;
         }
 
         public bool UploadResume(string username, string title, string description, HttpPostedFileBase content)
@@ -71,7 +80,12 @@ namespace ResumeSearch.Web.Core.Logic.Services
 
         public bool DeleteResume(string username, int id)
         {
-            throw new NotImplementedException();
+            var resume = uow.ResumeRepository.GetById(id);
+            if (resume.User.Username != username)
+                throw new UnauthorizedAccessException(username + " not permitted to delete resume: " + id);
+         
+            uow.ResumeRepository.DeleteResume(resume);
+            return uow.Save();       
         }
 
         protected void Dispose(bool disposing)

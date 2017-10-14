@@ -14,6 +14,9 @@ namespace ResumeSearch.Web.Core.Data.Entities
 
         }
         public virtual string Word { get; set; }
+        public int ResumeId { get; set; }
+
+        [ForeignKey("ResumeId")]
         public virtual Resume Resume { get; set; }
     }
 }

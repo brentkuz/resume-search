@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace ResumeSearch.Web.Controllers
 {
+    [OutputCache(Duration = 1, VaryByParam = "*")]
     public class ResumeController : ControllerBase
     {
         private IResumeService resumeService;
@@ -35,12 +36,10 @@ namespace ResumeSearch.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetUpload(string message = null, bool success = true)
+        public ActionResult GetUpload()
         {
             var vm = new UploadVM();
-            if (message != null)
-                vm.Notification = new NotificationVM(message, success ? NotificationType.Success : NotificationType.Info);
-            return PartialView("~/Views/Resume/Upload.cshtml", vm);
+            return PartialView("~/Views/Resume/UploadPartial.cshtml", vm);
         }
         [HttpPost]
         public ActionResult Upload()
@@ -51,19 +50,35 @@ namespace ResumeSearch.Web.Controllers
                 var title = myFile.FileName;
                 var desc = Request.Form["Description"];
                 bool isUploaded = true;
-                string message = "Success";
 
                 if (myFile != null)
                 {
                     isUploaded = resumeService.UploadResume(User.Identity.Name, title, desc, myFile);
                 }
 
-                return Json(new { isUploaded = isUploaded, message = message }, "text/html");
+                var vm = new UploadVM()
+                {
+                    Notification = new NotificationVM()
+                    {
+                        Message = isUploaded ? "Success" : "Resume upload failed",
+                        Type = isUploaded ? NotificationType.Success : NotificationType.Error
+                    }
+                };
+
+                return PartialView("~/Views/Resume/UploadPartial.cshtml", vm);
             }
             catch(Exception ex)
             {
                 logger.Log(LogType.Error, "Resume upload failed", ex);
-                return Json(new { isUploaded = false, message = "Upload failed." }, "text/html");
+                var vm = new UploadVM()
+                {
+                    Notification = new NotificationVM()
+                    {
+                        Message = "Upload could not be completed.",
+                        Type = NotificationType.Error
+                    }
+                };
+                return PartialView("~/Views/Resume/UploadPartial.cshtml", vm);
             }
         }
         [HttpGet]
@@ -71,14 +86,40 @@ namespace ResumeSearch.Web.Controllers
         {
             try
             {
-                return null;
+                var res = resumeService.GetResume(User.Identity.Name, id);
+                return File(res.Content, "application/octet-stream", res.Title);
             }
             catch (Exception ex)
             {
-                return null;
+                logger.Log(LogType.Error, "Resume download failed.", ex);
+                return RedirectToAction("Error", "Utility", new { message = "An error occurred retrieving your resume." });
             }
         }
 
+        [HttpDelete]
+        public ActionResult Delete(int id)
+        {
+            var notif = new NotificationVM();
+            try
+            {
+                var res = resumeService.DeleteResume(User.Identity.Name, id);
+                notif.Message = "Success";
+                notif.Type = NotificationType.Success;
+            }
+            catch(Exception ex)
+            {
+                logger.Log(LogType.Error, "Resume delete failed.", ex);
+                notif.Message = "Failed to delete";
+                notif.Type = NotificationType.Error;
+            }
+
+            var vm = new ResumeListVM(resumeService.GetAllForUser(User.Identity.Name));
+            vm.Notification = notif;
+            return PartialView("~/Views/Resume/ResumeListPartial.cshtml", vm);
+            
+        }
+
+ 
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);

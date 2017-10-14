@@ -27,7 +27,9 @@ namespace ResumeSearch.Web.Core.Data.Entities
         public virtual byte[] Content { get; set; }
         public virtual List<Keyword> Keywords { get; set; }
         public virtual string FileType { get; set; }
+        public int UserId { get; set; }
 
+        [ForeignKey("UserId")]
         public virtual User User { get; set; }
     }
 }

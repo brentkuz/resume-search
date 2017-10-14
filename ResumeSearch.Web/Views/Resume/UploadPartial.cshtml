@@ -4,7 +4,7 @@
 <form>
     <div class="row" style="margin-top:30px;">
         <span class="col-sm-6">
-            @Html.TextBoxFor(m => m.Content, new { id = "fu-my-simple-upload", type = "file" })
+            @Html.TextBoxFor(m => m.Content, new { id = "uploadControl", type = "file", accept = ".txt,.doc,.docx,.pdf" })
         </span>
         <span class="col-sm-6">
             @Html.TextAreaFor(m => m.Description, new { name = "Description", @class = "form-control", placeholder = "Description..." })
@@ -12,16 +12,15 @@
     </div>
     <div class="row">
         <span class="col-sm-12">
-            <button class="btn" id="hl-start-upload">Start upload</button>
+            <button class="btn" id="uploadBtn">Start upload</button>
         </span>
     </div>
 </form>
 
 
 
-
 <script type="text/javascript">
-    my.upload.init();
+    my.uploadPartial.init();
 </script>
 
 
