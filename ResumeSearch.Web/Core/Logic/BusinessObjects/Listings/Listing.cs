@@ -29,13 +29,14 @@ namespace ResumeSearch.Web.Core.Logic.BusinessObjects.Listings
             Location = job.Location;
             Body = job.Body;
             Company = job.Company;
-            //Date = Convert.ToDateTime(job.Date);
+            //TODO: figure out weird UTC format conversion - "Wed Oct 04 17:48:47 UTC 2017"
+            //Date = job.Date != "" ? Convert.ToDateTime(job.Date) : null;
 
             words = preprocess.Process(Body);
         }
 
         public ListingSource Source { get { return source; } }
-        public int Rank { get; set; }
+        public int PercentMatch { get; set; }
         public string Url { get; private set; }
         public string Title { get; set; }
         public string Location { get; set; }

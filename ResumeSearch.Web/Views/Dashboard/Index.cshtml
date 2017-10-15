@@ -3,16 +3,39 @@
     ViewBag.Title = "Index";
 }
 
-<div class="row">
-    <div class="col-sm-6">
-        <div id="resumeUpload">       
-            @{Html.RenderAction("GetUpload", "Resume");}
+@using (Ajax.BeginForm("Search", "Search", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "my.utility.block('#searchResults', true)",
+    OnComplete = "my.utility.block('#searchResults', false)",
+    UpdateTargetId = "searchResults"
+}))
+{
+    <div class="row">
+        <div class="col-sm-7">
+            <h4>Step 1: Upload resume(s) and check which one to search on</h4>
+            <div id="resumeUpload">   
+                test
+                @{Html.RenderAction("GetUpload", "Resume");}
+            </div>
+            <div id="resumeList">
+                @{Html.RenderAction("GetResumes", "Resume");}
+            </div>
         </div>
-        <div id="resumeList">
-            @{Html.RenderAction("GetResumes", "Resume");}
-        </div>
+        <div class="col-sm-5">
+            <h4>Step 2: Enter search criteria</h4>
+            <div id="search">
+                @{Html.RenderAction("GetSearch", "Search");}
+            </div>
+        </div>    
+        <h4>Step 3: Click "Search"</h4>
+        <input type="submit" value="Search" />
     </div>
-    <div class="col-sm-6">
-        Search
+    <div class="row">
+
     </div>
+}
+<div id="searchResults">
+    
 </div>

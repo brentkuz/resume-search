@@ -39,7 +39,6 @@ namespace ResumeSearch.Web.Core.Utility
 
             //Core.JobAPIs
             container.RegisterType<IGitHubAPI, GitHubAPI>();
-            container.RegisterType<IResumeRepository, ResumeRepository>();
 
             //Core.Logic
             container.RegisterType<IFileFactory, FileFactory>();
@@ -50,7 +49,9 @@ namespace ResumeSearch.Web.Core.Utility
             container.RegisterType<IAccountService, AccountService>();
             container.RegisterType<IResumeService, ResumeService>();
             container.RegisterType<IModelValidator, ModelValidator>();
-            container.RegisterType<IResumeRepository, ResumeRepository>();
+            container.RegisterType<ISearchService, SearchService>();
+            container.RegisterType<IListingService, ListingService>();
+
 
             //Core.Utility
             container.RegisterType<ILogger, Logger>();

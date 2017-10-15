@@ -8,6 +8,7 @@ using ResumeSearch.Web.Core.Utility;
 namespace ResumeSearch.Web.Controllers
 {
     [Authorize]
+    [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
     public class DashboardController : ControllerBase
     {
         public DashboardController(ILogger logger) : base(logger)

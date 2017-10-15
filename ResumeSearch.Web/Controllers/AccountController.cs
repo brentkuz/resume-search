@@ -13,6 +13,7 @@ using System.Web.Security;
 
 namespace ResumeSearch.Web.Controllers
 {
+    [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
     public class AccountController : ControllerBase
     {
         private AppMembershipProvider provider;

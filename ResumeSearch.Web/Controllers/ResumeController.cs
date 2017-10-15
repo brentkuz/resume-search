@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ResumeSearch.Web.Controllers
 {
-    [OutputCache(Duration = 1, VaryByParam = "*")]
+    
     public class ResumeController : ControllerBase
     {
         private IResumeService resumeService;
@@ -22,7 +22,7 @@ namespace ResumeSearch.Web.Controllers
         {
             try
             {
-                var vm = new ResumeListVM(resumeService.GetAllForUser(User.Identity.Name));                
+                var vm = new ResumeListVM(resumeService.GetAllForUser(User.Identity.Name));    
                 return PartialView("~/Views/Resume/ResumeListPartial.cshtml", vm);
             }
             catch(Exception ex)

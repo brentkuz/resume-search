@@ -20,38 +20,43 @@
                 <th></th>
             </tr>
 
-            @foreach (var item in Model.Resumes)
-            {
+            @{ 
+                for(var i = 0; i < Model.Resumes.Count; i++)
+                {
                 <tr>
                     <td>
-                        <input type="checkbox" class="resumeChk" onchange="my.resumeListPartial.check(this, @item.Id)" data-id="@item.Id" />
+                        @Html.HiddenFor(m => m.Resumes[i].Id)
+                        @Html.CheckBoxFor(m => m.Resumes[i].IsChecked, 
+                            new { @class = "resumeChk", @onchange = "my.resumeListPartial.check(this," +  Model.Resumes[i].Id + ")", data_id = Model.Resumes[i].Id })
+                        
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Title)
+                        @Html.DisplayFor(m => m.Resumes[i].Title)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.UploadDate)
+                        @Html.DisplayFor(m => m.Resumes[i].UploadDate)
                     </td>
                     <td>
                         <span class="descDropSpan">Show</span>
-                        <div class="descDropDiv">@item.Description</div>
+                        <div class="descDropDiv">@Model.Resumes[i].Description</div>
                     </td>
                     <td>
-                        @Html.ActionLink("View", "Download", "Resume", new { id = item.Id }, null) |
-                        @Ajax.ActionLink("Delete", "Delete", "Resume", new { id = item.Id },
-               new AjaxOptions()
-               {
-                   HttpMethod = "DELETE",
-                   InsertionMode = InsertionMode.Replace,
-                   UpdateTargetId = "resumeList",
-                   OnBegin = "my.utility.block('#resumeList', true)",
-                   OnComplete = "my.utility.block('#resumeList', false)"
-               },
-               null)
+                        @Html.ActionLink("View", "Download", "Resume", new { id = Model.Resumes[i].Id }, null) |
+                        @Ajax.ActionLink("Delete", "Delete", "Resume", new { id = Model.Resumes[i].Id },
+                    new AjaxOptions()
+                {
+                    HttpMethod = "DELETE",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "resumeList",
+                        OnBegin = "my.utility.block('#resumeList', true)",
+                        OnComplete = "my.utility.block('#resumeList', false)"
+                    },
+                    null)
 
                     </td>
                 </tr>
-            }
+                    }
+                }
 
         </table>
     </div>

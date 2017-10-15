@@ -185,7 +185,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Core\Logic\Services\ListingService.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UtilityController.cs" />
     <Compile Include="Core\Data\Contexts\AppContext.cs" />
     <Compile Include="Core\Data\Entities\EntityBase.cs" />
@@ -208,6 +210,7 @@
     <Compile Include="Core\Logic\BusinessObjects\Listings\Listing.cs" />
     <Compile Include="Core\Logic\DocumentReaders\BytesReader.cs" />
     <Compile Include="Core\Logic\Services\ResumeService.cs" />
+    <Compile Include="Core\Logic\Services\SearchService.cs" />
     <Compile Include="Core\Utility\UnityContainerFactory.cs" />
     <Compile Include="Migrations\201710080351111_Up1.cs" />
     <Compile Include="Migrations\201710080351111_Up1.Designer.cs">
@@ -237,8 +240,12 @@
     <Compile Include="Migrations\201710140406004_AddedFKs.Designer.cs">
       <DependentUpon>201710140406004_AddedFKs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\ListingVM.cs" />
     <Compile Include="Models\ResumeListItemVM.cs" />
     <Compile Include="Models\ResumeListVM.cs" />
+    <Compile Include="Models\ResumeSearchVM.cs" />
+    <Compile Include="Models\SearchResultVM.cs" />
+    <Compile Include="Models\SearchVM.cs" />
     <Compile Include="Models\UploadVM.cs" />
     <Compile Include="Security\SecurityHelpers.cs" />
     <Compile Include="Security\UserPrincipal.cs" />
@@ -333,6 +340,9 @@
     <Content Include="Views\Resume\ResumeListPartial.cshtml" />
     <Content Include="Views\Shared\NotificationPartial.cshtml" />
     <Content Include="Views\Resume\UploadPartial.cshtml" />
+    <Content Include="Views\Search\SearchPartial.cshtml" />
+    <Content Include="Views\Search\SearchResultPartial.cshtml" />
+    <Content Include="Views\Search\ListingsListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

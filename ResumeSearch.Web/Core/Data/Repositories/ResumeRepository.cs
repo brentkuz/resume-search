@@ -11,6 +11,7 @@ namespace ResumeSearch.Web.Core.Data.Repositories
     {
         List<Resume> GetAllForUser(string username);
         Resume GetById(int id);
+        List<Resume> GetByIdList(List<int> ids);
         void InsertResume(Resume resume);
         void DeleteResume(Resume resume);
     }
@@ -29,6 +30,11 @@ namespace ResumeSearch.Web.Core.Data.Repositories
         public Resume GetById(int id)
         {
             return context.Resumes.Find(id);
+        }
+
+        public List<Resume> GetByIdList(List<int> ids)
+        {
+            return context.Resumes.Where(r => ids.Contains(r.Id)).ToList();
         }
 
         public void InsertResume(Resume resume)

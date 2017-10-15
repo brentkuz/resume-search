@@ -25,6 +25,7 @@ namespace ResumeSearch.Web.Core.Logic.NLP
 
         protected string Stem(string word)
         {
+            //TODO: wire up to OleanderStemming proj
             return word;
         }
         protected string CleanWord(string word)

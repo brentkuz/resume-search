@@ -1,0 +1,15 @@
+﻿@model ResumeSearch.Web.Models.SearchResultVM
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Count)
+        </dd>
+    </dl>
+    @Html.Partial("~/Views/Search/ListingsListPartial.cshtml", Model.Listings)
+</div>
+
