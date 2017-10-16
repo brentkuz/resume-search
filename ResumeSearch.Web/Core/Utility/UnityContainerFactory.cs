@@ -7,6 +7,8 @@ using ResumeSearch.Web.Core.Logic.DocumentReaders;
 using ResumeSearch.Web.Core.Logic.NLP;
 using ResumeSearch.Web.Core.Logic.Preprocess.Files;
 using ResumeSearch.Web.Core.Logic.Preprocess.Listings;
+using ResumeSearch.Web.Core.Logic.Ranking;
+using ResumeSearch.Web.Core.Logic.Ranking.Strategies;
 using ResumeSearch.Web.Core.Logic.Services;
 using ResumeSearch.Web.Core.Logic.Utility;
 using System;
@@ -51,6 +53,9 @@ namespace ResumeSearch.Web.Core.Utility
             container.RegisterType<IModelValidator, ModelValidator>();
             container.RegisterType<ISearchService, SearchService>();
             container.RegisterType<IListingService, ListingService>();
+            container.RegisterType<IRanker, Ranker>();
+            container.RegisterType<IRankingStrategy, Relevance>();
+            container.RegisterType<ITemporaryFileService, TemporaryFileService>();
 
 
             //Core.Utility

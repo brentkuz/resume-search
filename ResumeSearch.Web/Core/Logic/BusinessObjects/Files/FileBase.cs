@@ -33,7 +33,11 @@ namespace ResumeSearch.Web.Core.Logic.BusinessObjects.Files
         public string Path { get { return path; } }
         public DocumentType DocumentType { get { return documentType; } }
         public FileType FileType { get { return fileType; } }
-        public HashSet<string> Words { get { return words; } }
+        public HashSet<string> Words
+        {
+            get { return words; }
+            protected set { words = value; }
+        }
         public bool Exists(string word)
         {
             return words.Contains(word.ToLower());

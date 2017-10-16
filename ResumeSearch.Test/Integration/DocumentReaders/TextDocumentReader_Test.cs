@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using ResumeSearch.Web.Core.Logic.Utility;
 using ResumeSearch.Web.Core.Logic.DocumentReaders;
+using ResumeSearch.Web.Core.Utility;
 
 namespace ResumeSearch.Test.Integration.DocumentReaders
 {

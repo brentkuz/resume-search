@@ -5,6 +5,7 @@ using ResumeSearch.Web.Core.Logic.BusinessObjects.Files;
 using ResumeSearch.Web.Core.Logic.DocumentReaders;
 using ResumeSearch.Web.Core.Logic.NLP;
 using ResumeSearch.Web.Core.Logic.Preprocess.Files;
+using ResumeSearch.Web.Core.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,11 +25,13 @@ namespace ResumeSearch.Web.Core.Logic.Services
         private bool disposed = false;
         private IUnitOfWork uow;
         private IFileFactory fileFactory;
+        private ITemporaryFileService tempFileService;
        
-        public ResumeService(IUnitOfWork uow, IFileFactory fileFactory)
+        public ResumeService(IUnitOfWork uow, IFileFactory fileFactory, ITemporaryFileService tempFileService)
         {
             this.uow = uow;
             this.fileFactory = fileFactory;
+            this.tempFileService = tempFileService;
         }
 
         public List<Resume> GetAllForUser(string username)
@@ -46,23 +49,33 @@ namespace ResumeSearch.Web.Core.Logic.Services
 
         public bool UploadResume(string username, string title, string description, HttpPostedFileBase content)
         {
-            byte[] bytes;
-            //get bytes
-            using (var inStr = content.InputStream)
-            {
-                var memStr = inStr as System.IO.MemoryStream;
-                if (memStr == null)
-                {
-                    memStr = new System.IO.MemoryStream();
-                    inStr.CopyTo(memStr);
-                }
-                bytes = memStr.ToArray();
-                memStr.Dispose();
-            }
-            //process bytes
+            var docType = Helpers.GetWebUploadType(content.ContentType);
             var list = uow.ValueRepository.GetStopwords();
             var stopwords = fileFactory.GetStopwordsFile(DocumentType.Set, list);
-            var file = fileFactory.GetResumeFile(DocumentType.Bytes, stopwords, bytes);
+            IResumeFile file;
+            //get bytes
+            int contentLength = content.ContentLength;
+            byte[] bytes = content.GetBytes();
+            switch (docType)
+            {                
+                case DocumentType.Word:
+                    {
+                        string tmpPath = tempFileService.CreateTempFile(bytes, content.FileName, contentLength);
+                        file = fileFactory.GetResumeFile(DocumentType.Word, stopwords, tmpPath);
+                        tempFileService.DeleteTempFile(tmpPath);
+                        break;
+                    }
+                default:
+                    {
+                       
+                        //process bytes
+                        file = fileFactory.GetResumeFile(DocumentType.Bytes, stopwords, bytes);
+                        break;
+                    }
+            }
+
+            if (bytes == null)
+                throw new NullReferenceException("Could not retrieve bytes form upload.");
 
             //build entity graph
             List<Keyword> words = new List<Keyword>();

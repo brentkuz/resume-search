@@ -19,9 +19,20 @@ namespace ResumeSearch.Web.Core.Utility
             }
             return dir;
         }
-
+        
         #region Document Types
-        private static Dictionary<string, DocumentType> typeMap = new Dictionary<string, DocumentType>
+        private static Dictionary<string, DocumentType> typeMap = new Dictionary<string, DocumentType>()
+        {
+            { "application/vnd.openxmlformats-officedocument.wordprocessingml.document", DocumentType.Word },
+            { "text/plain", DocumentType.Text }
+        };
+        public static DocumentType GetWebUploadType(string mimeType)
+        {
+            if (!typeMap.Keys.Contains(mimeType))
+                throw new ArgumentException("File type not supported: " + mimeType);
+            return typeMap[mimeType];
+        }
+        private static Dictionary<string, DocumentType> extMap = new Dictionary<string, DocumentType>
         {
             { "txt", DocumentType.Text },
             { "doc", DocumentType.Word },
@@ -35,9 +46,9 @@ namespace ResumeSearch.Web.Core.Utility
         }
         public static DocumentType ResolveExtensionToType(string extension)
         {
-            if (!typeMap.Keys.Contains(extension))
-                throw new ArgumentException("File type not supported.");
-            return typeMap[extension];
+            if (!extMap.Keys.Contains(extension))
+                throw new ArgumentException("File extension not supported: " + extension);
+            return extMap[extension];
         }
         #endregion
 
@@ -45,5 +56,7 @@ namespace ResumeSearch.Web.Core.Utility
         {
             return Regex.Replace(input, "<.*?>", String.Empty);
         }
+
+       
     }
 }

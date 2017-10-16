@@ -33,11 +33,11 @@ namespace ResumeSearch.Web.Core.Logic.Services
         public async Task<List<Listing>> SearchListings(string phrase, string location, bool isFullTime)
         {
             var listings = new List<Listing>();
-            var ghListings =  await github.Search(phrase, location, isFullTime);
+            var ghListings =  github.Search(phrase, location, isFullTime);
 
-            //Task.WaitAll(ghListings);
+            await Task.WhenAll(ghListings);
 
-            foreach(var ghl in ghListings)
+            foreach(var ghl in ghListings.Result)
             {
                 listings.Add(new Listing(ghl, ghPreprocess));
             }

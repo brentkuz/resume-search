@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using ResumeSearch.Web.Core.Data.Entities;
 
 namespace ResumeSearch.Web.Core.Logic.BusinessObjects.Files
 {
@@ -37,6 +38,15 @@ namespace ResumeSearch.Web.Core.Logic.BusinessObjects.Files
                 words = preprocess.Process(rdr);
             }
         }
+        public ResumeFile(Resume entity) : base("", DocumentType.Bytes, FileType.Resume)
+        {
+            Content = entity.Content;
+            var set = new HashSet<string>();
+            foreach(var w in entity.Keywords)
+                set.Add(w.Word);
+            Words = set;
+        }
+
         public byte[] Content { get; set; }
 
         public IEnumerator GetEnumerator()

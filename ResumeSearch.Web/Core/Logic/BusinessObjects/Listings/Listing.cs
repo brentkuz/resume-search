@@ -36,13 +36,17 @@ namespace ResumeSearch.Web.Core.Logic.BusinessObjects.Listings
         }
 
         public ListingSource Source { get { return source; } }
-        public int PercentMatch { get; set; }
+        public decimal PercentMatch { get; set; }
         public string Url { get; private set; }
         public string Title { get; set; }
         public string Location { get; set; }
         public string Body { get; set; }
         public string Company { get; set; }
         public DateTime? Date { get; set; }
+        public HashSet<string> Words
+        {
+            get { return words; }
+        }
 
         private string ValueOrDefault(string val)
         {

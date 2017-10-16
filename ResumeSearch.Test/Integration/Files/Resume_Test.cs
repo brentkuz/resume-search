@@ -6,6 +6,7 @@ using ResumeSearch.Web.Core.Logic.Preprocess.Files;
 using ResumeSearch.Web.Core.Logic.BusinessObjects.Files;
 using ResumeSearch.Web.Core.Logic.NLP;
 using ResumeSearch.Web.Core.Logic.Utility;
+using ResumeSearch.Web.Core.Utility;
 
 namespace ResumeSearch.Test.Integration.Files
 {

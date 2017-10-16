@@ -185,6 +185,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Core\Logic\Ranking\Ranker.cs" />
+    <Compile Include="Core\Logic\Ranking\Strategies\IRankingStrategy.cs" />
+    <Compile Include="Core\Logic\Ranking\Strategies\Relevance.cs" />
     <Compile Include="Core\Logic\Services\ListingService.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -211,6 +214,8 @@
     <Compile Include="Core\Logic\DocumentReaders\BytesReader.cs" />
     <Compile Include="Core\Logic\Services\ResumeService.cs" />
     <Compile Include="Core\Logic\Services\SearchService.cs" />
+    <Compile Include="Core\Logic\Services\TemporaryFileService.cs" />
+    <Compile Include="Core\Utility\Extensions.cs" />
     <Compile Include="Core\Utility\UnityContainerFactory.cs" />
     <Compile Include="Migrations\201710080351111_Up1.cs" />
     <Compile Include="Migrations\201710080351111_Up1.Designer.cs">
@@ -264,7 +269,6 @@
     <Compile Include="Core\Logic\Preprocess\Listings\ListingPreprocessBase.cs" />
     <Compile Include="Core\Logic\Preprocess\Listings\ListingPreprocessFactory.cs" />
     <Compile Include="Core\Logic\Services\AccountService.cs" />
-    <Compile Include="Core\Logic\Utility\Helpers.cs" />
     <Compile Include="Core\Logic\Utility\ModelValidator.cs" />
     <Compile Include="Core\Utility\Helpers.cs" />
     <Compile Include="Core\Utility\Logger.cs" />
@@ -345,7 +349,7 @@
     <Content Include="Views\Search\ListingsListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Files\" />
     <Folder Include="Views\ControllerBase\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using ResumeSearch.Web.Core.Logic.BusinessObjects.Files;
 using ResumeSearch.Web.Core.Logic.NLP;
-using ResumeSearch.Web.Core.Logic.Utility;
+using ResumeSearch.Web.Core.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;

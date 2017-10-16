@@ -30,19 +30,35 @@ namespace ResumeSearch.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Search(List<ResumeSearchVM> resumes, SearchVM search)
         {
-            var selected = resumes.Where(r => r.IsChecked).Select(x => x.Id).ToList<int>();
-            var listings = await searchService.SearchListings(selected, search.Phrase, search.Location, search.IsFullTime);
-            var listingsVM = new List<ListingVM>();
-
-            foreach(var l in listings)
-                listingsVM.Add(new ListingVM(l));
-            
-            var vm = new SearchResultVM()
+            try
             {
-                Count = listings.Count,
-                Listings = listingsVM
-            };
-            return PartialView("~/Views/Search/SearchResultPartial.cshtml", vm);
+                var selected = resumes.Where(r => r.IsChecked).Select(x => x.Id).Single();
+                var listings = await searchService.SearchListings(selected, search.Phrase, search.Location, search.IsFullTime);
+                var listingsVM = new List<ListingVM>();
+
+                foreach (var l in listings)
+                    listingsVM.Add(new ListingVM(l));
+
+                var vm = new SearchResultVM()
+                {
+                    Count = listings.Count,
+                    Listings = listingsVM
+                };
+                return PartialView("~/Views/Search/SearchResultPartial.cshtml", vm);
+            }
+            catch(Exception ex)
+            {
+                logger.Log(LogType.Error, "Failed to complete search", ex);
+                var vm = new SearchResultVM()
+                {
+                    Notification = new NotificationVM()
+                    {
+                        Message = "Failed to load results",
+                        Type = NotificationType.Error
+                    }
+                };
+                return PartialView("~/Views/Search/SearchResultPartial.cshtml", vm);
+            }
         }
     }
 }
