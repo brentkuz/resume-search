@@ -1,4 +1,5 @@
-﻿using ResumeSearch.Web.Core.Logic.NLP;
+﻿using ResumeSearch.NLP.Processors;
+using ResumeSearch.Web.Core.Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;

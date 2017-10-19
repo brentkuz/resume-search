@@ -3,7 +3,7 @@ using ResumeSearch.Web.Core.Data.Entities;
 using ResumeSearch.Web.Core.Data.Repositories;
 using ResumeSearch.Web.Core.Logic.BusinessObjects.Files;
 using ResumeSearch.Web.Core.Logic.DocumentReaders;
-using ResumeSearch.Web.Core.Logic.NLP;
+using ResumeSearch.Web.Core.Logic;
 using ResumeSearch.Web.Core.Logic.Preprocess.Files;
 using ResumeSearch.Web.Core.Utility;
 using System;

@@ -4,7 +4,7 @@ using ResumeSearch.Web.Core.Data.Repositories;
 using ResumeSearch.Web.Core.JobAPIs.APIs;
 using ResumeSearch.Web.Core.Logic.BusinessObjects.Files;
 using ResumeSearch.Web.Core.Logic.DocumentReaders;
-using ResumeSearch.Web.Core.Logic.NLP;
+using ResumeSearch.Web.Core.Logic;
 using ResumeSearch.Web.Core.Logic.Preprocess.Files;
 using ResumeSearch.Web.Core.Logic.Preprocess.Listings;
 using ResumeSearch.Web.Core.Logic.Ranking;
@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ResumeSearch.NLP.Processors;
 
 namespace ResumeSearch.Web.Core.Utility
 {
@@ -45,7 +46,7 @@ namespace ResumeSearch.Web.Core.Utility
             //Core.Logic
             container.RegisterType<IFileFactory, FileFactory>();
             container.RegisterType<IDocumentReaderFactory, DocumentReaderFactory>();
-            container.RegisterType<ITextProcessor, TextProcessor>();
+            container.RegisterType<ITextProcessorFactory, TextProcessor>();
             container.RegisterType<IFilePreprocessFactory, FilePreprocessFactory>();
             container.RegisterType<IListingPreprocessFactory, ListingPreprocessFactory>();
             container.RegisterType<IAccountService, AccountService>();

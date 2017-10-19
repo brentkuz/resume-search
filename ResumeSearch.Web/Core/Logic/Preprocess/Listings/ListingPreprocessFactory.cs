@@ -1,11 +1,12 @@
 ﻿using ResumeSearch.Web.Core.Logic.BusinessObjects.Files;
 using ResumeSearch.Web.Core.Logic.BusinessObjects.Listings;
-using ResumeSearch.Web.Core.Logic.NLP;
+using ResumeSearch.Web.Core.Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ResumeSearch.NLP.Processors;
 
 namespace ResumeSearch.Web.Core.Logic.Preprocess.Listings
 {    

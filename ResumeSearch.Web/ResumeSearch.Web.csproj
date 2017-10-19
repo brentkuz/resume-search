@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -258,7 +259,6 @@
     <Compile Include="Core\Logic\DocumentReaders\IDocumentReader.cs" />
     <Compile Include="Core\Logic\DocumentReaders\TextDocumentReader.cs" />
     <Compile Include="Core\Logic\DocumentReaders\WordDocumentReader.cs" />
-    <Compile Include="Core\Logic\NLP\TextProcessor.cs" />
     <Compile Include="Core\Logic\Preprocess\Files\FilePreprocessBase.cs" />
     <Compile Include="Core\Logic\Preprocess\Files\FilePreprocessFactory.cs" />
     <Compile Include="Core\Logic\Preprocess\Files\IFilePreprocess.cs" />
@@ -350,6 +350,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Files\" />
+    <Folder Include="Core\Logic\NLP\" />
     <Folder Include="Views\ControllerBase\" />
   </ItemGroup>
   <ItemGroup>
@@ -392,6 +393,12 @@
     <EmbeddedResource Include="Migrations\201710140406004_AddedFKs.resx">
       <DependentUpon>201710140406004_AddedFKs.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ResumeSearch.NLP\ResumeSearch.NLP.csproj">
+      <Project>{943dde21-b97a-4066-9841-899883ac0df6}</Project>
+      <Name>ResumeSearch.NLP</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
