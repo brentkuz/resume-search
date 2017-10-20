@@ -12,11 +12,11 @@ namespace ResumeSearch.NLP
     {
         private static Dictionary<OpenNLPModel, string> englishPaths = new Dictionary<OpenNLPModel, string>()
             {
-                { OpenNLPModel.Tokenizer, @"\Models\EnglishTok.nbin" },
-                { OpenNLPModel.SentenceDetector, @"\Models\EnglishSD.nbin" },
-                { OpenNLPModel.POS, @"\Models\EnglishPOS.nbin"}
+                { OpenNLPModel.Tokenizer, @"NLPModels\EnglishTok.nbin" },
+                { OpenNLPModel.SentenceDetector, @"NLPModels\EnglishSD.nbin" },
+                { OpenNLPModel.POS, @"NLPModels\EnglishPOS.nbin"}
             };
-        internal static string GetModelPath(OpenNLPModel model, Language language)
+        public static string GetModelPath(OpenNLPModel model, Language language)
         {
             Dictionary<OpenNLPModel, string> current;
             //set correct path map
@@ -31,11 +31,18 @@ namespace ResumeSearch.NLP
                     throw new NotSupportedException("Language not supported: " + language.ToString());
             }
 
-            //get path for assembly
-            var path = current[model];
-            var dirPath = Assembly.GetExecutingAssembly().Location;
-            dirPath = Path.GetDirectoryName(dirPath);
-            return dirPath + path;
+            return BuildPath(current[model]);
+
+        }
+        public static string BuildPath(string relativePath)
+        {
+            var dir = AppDomain.CurrentDomain.BaseDirectory;
+            var bin = dir.IndexOf("bin");
+            if (bin > 0)
+            {
+                dir = dir.Substring(0, bin);
+            }
+            return dir + relativePath;           
         }
     }
 }

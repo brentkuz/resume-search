@@ -6,30 +6,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ResumeSearch.NLP.Processors;
+using ResumeSearch.NLP;
 
 namespace ResumeSearch.Web.Core.Logic.Preprocess.Files
 {    
     public interface IFilePreprocessFactory
     {
-        IFilePreprocess GetPreprocess(FileType fileType, IStopwordsFile stopwords = null);
+        IFilePreprocess GetPreprocess(FileType fileType, Language language, IStopwordsFile stopwords = null);
     }
     public class FilePreprocessFactory : IFilePreprocessFactory
     {
-        private ITextProcessor textProcessor;
+        private ITextProcessorFactory procFact;
         
-        public FilePreprocessFactory(ITextProcessor textProcessor)
+        public FilePreprocessFactory(ITextProcessorFactory procFact)
         {
-            this.textProcessor = textProcessor;
+            this.procFact = procFact;
         }
-        public IFilePreprocess GetPreprocess(FileType fileType, IStopwordsFile stopwords = null)
+        public IFilePreprocess GetPreprocess(FileType fileType, Language language, IStopwordsFile stopwords = null)
         {
             Validate(stopwords, fileType);
             switch (fileType)
             {
                 case FileType.Resume:
-                    return new ResumePreprocess(stopwords, textProcessor);
+                    return new ResumePreprocess(stopwords, procFact.GetTextProcessor(language));
                 case FileType.Stopwords:
-                    return new StopwardsPreprocess(textProcessor);
+                    return new StopwardsPreprocess(procFact.GetTextProcessor(language));
                 default:
                     throw new Exception("Failed to instantiate file preprocess.");
             }

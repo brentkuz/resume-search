@@ -16,6 +16,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ResumeSearch.NLP.Processors;
+using ResumeSearch.NLP.SentenceDetection;
+using ResumeSearch.NLP.Stemming;
+using ResumeSearch.NLP.Tokenizing;
 
 namespace ResumeSearch.Web.Core.Utility
 {
@@ -45,8 +48,7 @@ namespace ResumeSearch.Web.Core.Utility
 
             //Core.Logic
             container.RegisterType<IFileFactory, FileFactory>();
-            container.RegisterType<IDocumentReaderFactory, DocumentReaderFactory>();
-            container.RegisterType<ITextProcessorFactory, TextProcessor>();
+            container.RegisterType<IDocumentReaderFactory, DocumentReaderFactory>();            
             container.RegisterType<IFilePreprocessFactory, FilePreprocessFactory>();
             container.RegisterType<IListingPreprocessFactory, ListingPreprocessFactory>();
             container.RegisterType<IAccountService, AccountService>();
@@ -58,10 +60,17 @@ namespace ResumeSearch.Web.Core.Utility
             container.RegisterType<IRankingStrategy, Relevance>();
             container.RegisterType<ITemporaryFileService, TemporaryFileService>();
 
-
             //Core.Utility
             container.RegisterType<ILogger, Logger>();
             container.RegisterType<IUnityContainerFactory, UnityContainerFactory>();
+
+
+            //NLP
+            container.RegisterType<ISentenceDetectorFactory, SentenceDetectorFactory>();
+            container.RegisterType<IStemmerFactory, StemmerFactory>();
+            container.RegisterType<ITokenizerFactory, TokenizerFactory>();
+            container.RegisterType<ITextProcessorFactory, TextProcessorFactory>();
+
         }
     }
 }

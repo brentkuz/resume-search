@@ -25,12 +25,16 @@ namespace ResumeSearch.Web.Core.Logic.Preprocess.Files
             {
                 var line = reader.ReadLine();
                 if (line != string.Empty)
-                {
-                    var words = textProcessor.Tokenize(line);
+                { 
+                    var words = new List<string>();
+                    var sent = textProcessor.GetSentences(line);
+
+                    //TODO: finishe process order
+                     = textProcessor.ProcessText(line);
                     foreach (var word in words)
                     {
                         if (!res.Contains(word) && !stopwords.Exists(word))
-                            res.Add(textProcessor.ProcessWord(word));
+                            res.Add(textProcessor.Stem(word));
                     }
                 }
             }

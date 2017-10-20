@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using ResumeSearch.Web.Core.Data.Entities;
+using ResumeSearch.NLP;
 
 namespace ResumeSearch.Web.Core.Logic.BusinessObjects.Files
 {
@@ -22,7 +23,7 @@ namespace ResumeSearch.Web.Core.Logic.BusinessObjects.Files
         public ResumeFile(string path, DocumentType documentType, IStopwordsFile stopwords, IFilePreprocessFactory preprocessFactory, IDocumentReaderFactory readerFactory) 
             : base(path, documentType, FileType.Resume)
         {
-            var preprocess = preprocessFactory.GetPreprocess(FileType.Resume, stopwords);
+            var preprocess = preprocessFactory.GetPreprocess(FileType.Resume, Language.English, stopwords);
             using (var rdr = readerFactory.GetFileReader(documentType, path))
             {
                 words = preprocess.Process(rdr);
@@ -32,7 +33,7 @@ namespace ResumeSearch.Web.Core.Logic.BusinessObjects.Files
             : base("", documentType, FileType.Resume)
         {
             Content = content;
-            var preprocess = preprocessFactory.GetPreprocess(FileType.Resume, stopwords);
+            var preprocess = preprocessFactory.GetPreprocess(FileType.Resume, Language.English, stopwords);
             using (var rdr = readerFactory.GetStreamReader(content))
             {
                 words = preprocess.Process(rdr);

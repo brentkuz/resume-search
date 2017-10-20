@@ -18,7 +18,7 @@ namespace ResumeSearch.NLP.SentenceDetection
 
         public IEnumerable<string> DetectSentences(string text)
         {
-            return sd.SentenceDetect(text);
+            return sd.SentenceDetect(text).ToList();
         }
     }
 }

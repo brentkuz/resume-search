@@ -2,11 +2,15 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using ResumeSearch.Web.Core.Logic.Preprocess.Files;
-using ResumeSearch.Web.Core.Logic.NLP;
+using ResumeSearch.Web.Core.Logic;
 using ResumeSearch.Web.Core.Logic.DocumentReaders;
 using ResumeSearch.Web.Core.Logic.BusinessObjects.Files;
 using ResumeSearch.Web.Core.Logic.Utility;
 using ResumeSearch.Web.Core.Utility;
+using ResumeSearch.NLP.Processors;
+using ResumeSearch.NLP.SentenceDetection;
+using ResumeSearch.NLP.Tokenizing;
+using ResumeSearch.NLP.Stemming;
 
 namespace ResumeSearch.Test.Integration.Files
 {
@@ -19,7 +23,7 @@ namespace ResumeSearch.Test.Integration.Files
         [TestInitialize]
         public void Init()
         {
-            preFact = new FilePreprocessFactory(new TextProcessor());
+            preFact = new FilePreprocessFactory(new TextProcessorFactory(new SentenceDetectorFactory(), new TokenizerFactory(), new StemmerFactory()));
             docFact = new DocumentReaderFactory();
         }
 

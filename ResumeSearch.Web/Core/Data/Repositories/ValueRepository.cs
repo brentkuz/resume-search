@@ -15,7 +15,7 @@ namespace ResumeSearch.Web.Core.Data.Repositories
     }
     public class ValueRepository : RepositoryBase, IValueRepository
     {
-        public ValueRepository(AppContext context) : base(context)
+        public ValueRepository(ResumeSearchContext context) : base(context)
         {
         }
 

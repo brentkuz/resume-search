@@ -16,17 +16,17 @@ namespace ResumeSearch.Web.Core.Logic.Preprocess.Listings
     }
     public class ListingPreprocessFactory : IListingPreprocessFactory
     {
-        private ITextProcessor textProcessor;
-        public ListingPreprocessFactory(ITextProcessor textProcessor)
+        private ITextProcessorFactory procFact;
+        public ListingPreprocessFactory(ITextProcessorFactory procFact)
         {
-            this.textProcessor = textProcessor;
+            this.procFact = procFact;
         }
         public IListingPreprocess GetPreprocess(ListingSource source, IStopwordsFile stopwords = null)
         {
             switch (source)
             {
                 case ListingSource.Github:
-                    return new GitHubPreprocess(stopwords, textProcessor);
+                    return new GitHubPreprocess(stopwords, procFact.GetTextProcessor(NLP.Language.English));
                 default:
                     throw new Exception("Failed to instantiate listing preprocess.");
             }

@@ -8,7 +8,9 @@ namespace ResumeSearch.NLP.Processors
 {
     public interface ITextProcessor
     {
+        List<string> GetSentences(string text);
         List<string> Tokenize(string text);
-        string ProcessWord(string word);
+        string Stem(string word);      
+        List<string> ProcessText(string text);
     }
 }

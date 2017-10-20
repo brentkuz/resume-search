@@ -1,4 +1,5 @@
-﻿using ResumeSearch.Web.Core.Data.Entities;
+﻿using ResumeSearch.NLP;
+using ResumeSearch.Web.Core.Data.Entities;
 using ResumeSearch.Web.Core.Logic.DocumentReaders;
 using ResumeSearch.Web.Core.Logic.Preprocess;
 using ResumeSearch.Web.Core.Logic.Preprocess.Files;
@@ -16,7 +17,7 @@ namespace ResumeSearch.Web.Core.Logic.BusinessObjects.Files
         public StopwordsFile(string path, DocumentType documentType, IFilePreprocessFactory preprocessFactory, IDocumentReaderFactory readerFactory) 
             : base(path, documentType, FileType.Stopwords)
         {
-            var preprocess = preprocessFactory.GetPreprocess(FileType.Stopwords);
+            var preprocess = preprocessFactory.GetPreprocess(FileType.Stopwords, Language.English);
             using (var rdr = readerFactory.GetFileReader(documentType, path))
             {
                 words = preprocess.Process(rdr);

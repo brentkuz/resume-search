@@ -10,7 +10,7 @@ namespace ResumeSearch.NLP.Tokenizing
     {
         ITokenizer GetTokenizer(Language language);
     }
-    class TokenizerFactory : ITokenizerFactory
+    public class TokenizerFactory : ITokenizerFactory
     {
         public ITokenizer GetTokenizer(Language language)
         {

@@ -86,9 +86,9 @@
     <Folder Include="Factories\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Models\EnglishPOS.nbin" />
-    <None Include="Models\EnglishSD.nbin" />
-    <None Include="Models\EnglishTok.nbin" />
+    <None Include="NLPModels\EnglishPOS.nbin" />
+    <None Include="NLPModels\EnglishSD.nbin" />
+    <None Include="NLPModels\EnglishTok.nbin" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

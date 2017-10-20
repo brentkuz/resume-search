@@ -17,7 +17,7 @@ namespace ResumeSearch.Web.Core.Data.Repositories
     }
     public class ResumeRepository : RepositoryBase, IResumeRepository
     {
-        public ResumeRepository(AppContext context) : base(context)
+        public ResumeRepository(ResumeSearchContext context) : base(context)
         {
         }
 

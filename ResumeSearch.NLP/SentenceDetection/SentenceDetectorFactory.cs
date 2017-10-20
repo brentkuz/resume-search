@@ -11,7 +11,7 @@ namespace ResumeSearch.NLP.SentenceDetection
         ISentenceDetector GetSentenceDetector(Language language);
     }
 
-    class SentenceDetectorFactory : ISentenceDetectorFactory
+    public class SentenceDetectorFactory : ISentenceDetectorFactory
     {
         public ISentenceDetector GetSentenceDetector(Language language)
         {

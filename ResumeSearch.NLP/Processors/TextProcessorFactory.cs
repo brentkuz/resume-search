@@ -13,7 +13,7 @@ namespace ResumeSearch.NLP.Processors
     {
         ITextProcessor GetTextProcessor(Language language);
     }
-    class TextProcessorFactory : ITextProcessorFactory
+    public class TextProcessorFactory : ITextProcessorFactory
     {
         private ISentenceDetectorFactory sdFact;
         private ITokenizerFactory tokFact;
@@ -29,7 +29,7 @@ namespace ResumeSearch.NLP.Processors
             switch (language)
             {
                 case Language.English:
-                    return new EnglishTextProcessor(sdFact.GetSentenceDetector(Language.English), tokFact.GetTokenizer(Language.English), );
+                    return new EnglishTextProcessor(sdFact, tokFact, stemFact);
                 default:
                     throw new NotSupportedException("Unsupported language: " + language.ToString());
             }

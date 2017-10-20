@@ -17,14 +17,14 @@ namespace ResumeSearch.Web.Core.Data
     public class UnitOfWork : IUnitOfWork
     {
         private bool disposed = false;
-        private AppContext context;
+        private ResumeSearchContext context;
         private IUserRepository userRepository;
         private IResumeRepository resumeRepository;
         private IValueRepository valueRepository;
 
         public UnitOfWork()
         {
-            context = new AppContext();
+            context = new ResumeSearchContext();
         }
 
         public IUserRepository UserRepository

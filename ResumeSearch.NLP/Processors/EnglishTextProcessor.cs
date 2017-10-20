@@ -24,24 +24,36 @@ namespace ResumeSearch.NLP.Processors
             stemmer = stemmerFact.GetStemmer(Language);
         }
 
-        public string ProcessWord(string word)
+        public List<string> GetSentences(string text)
         {
-            return Stem(CleanWord(word));
+            return sd.DetectSentences(text).ToList();
         }
+
         public List<string> Tokenize(string text)
         {
-            return text.Split(null).ToList();
+            return tokenizer.Tokenize(text).ToList();
         }
 
-        protected string Stem(string word)
+        public string Stem(string word)
         {
-            //TODO: wire up to OleanderStemming proj
-            return word;
-        }
-        protected string CleanWord(string word)
-        {
-            return Regex.Replace(word.Trim().ToLower(), @"[^\w\s]", "");
+            return stemmer.Stem(word);
         }
 
+        public List<string> ProcessText(string text)
+        {
+            var words = new List<string>();
+            var sent = sd.DetectSentences(text);
+            foreach(var s in sent)
+            {
+                var toks = tokenizer.Tokenize(s);
+                foreach(var t in toks)
+                {
+                    words.Add(stemmer.Stem(t));
+                }
+            }
+            return words;
+        }
+
+       
     }
 }

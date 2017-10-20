@@ -9,9 +9,9 @@ namespace ResumeSearch.Web.Core.Data.Repositories
 {
     public class RepositoryBase
     {
-        protected AppContext context;
+        protected ResumeSearchContext context;
 
-        public RepositoryBase(AppContext context)
+        public RepositoryBase(ResumeSearchContext context)
         {
             this.context = context;
         }

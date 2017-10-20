@@ -10,14 +10,14 @@ namespace ResumeSearch.Web.Migrations
     using System.IO;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ResumeSearch.Web.Core.Data.Contexts.AppContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ResumeSearch.Web.Core.Data.Contexts.ResumeSearchContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(ResumeSearch.Web.Core.Data.Contexts.AppContext context)
+        protected override void Seed(ResumeSearch.Web.Core.Data.Contexts.ResumeSearchContext context)
         {
             //Delete data
             context.Database.ExecuteSqlCommand("sp_MSForEachTable 'ALTER TABLE ? NOCHECK CONSTRAINT ALL'");

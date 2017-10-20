@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ResumeSearch.Test</RootNamespace>
     <AssemblyName>ResumeSearch.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
@@ -19,6 +19,7 @@
     <TestProjectType>UnitTest</TestProjectType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -99,6 +100,7 @@
     <Compile Include="Integration\DocumentReaders\TextDocumentReader_Test.cs" />
     <Compile Include="Integration\Files\Stopwords_Test.cs" />
     <Compile Include="Integration\Files\Resume_Test.cs" />
+    <Compile Include="NLP\Utility_Test.cs" />
     <Compile Include="Security\SecurityHelpers_Test.cs" />
     <Compile Include="Unit\NLP\TextProcessor_Test.cs" />
     <Compile Include="Integration\DocumentReaders\WordDocumentReader_Test.cs" />
@@ -107,6 +109,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="empty.docx" />
+    <None Include="NLPModels\EnglishPOS.nbin" />
+    <None Include="NLPModels\EnglishSD.nbin" />
+    <None Include="NLPModels\EnglishTok.nbin" />
     <None Include="packages.config" />
     <None Include="resume.docx" />
   </ItemGroup>
@@ -116,6 +121,10 @@
     <Content Include="stopwords.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ResumeSearch.NLP\ResumeSearch.NLP.csproj">
+      <Project>{943dde21-b97a-4066-9841-899883ac0df6}</Project>
+      <Name>ResumeSearch.NLP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ResumeSearch.Web\ResumeSearch.Web.csproj">
       <Project>{a1918c26-eae7-485b-9aab-6e4365dc14e1}</Project>
       <Name>ResumeSearch.Web</Name>
