@@ -13,19 +13,28 @@ namespace ResumeSearch.Web.Core.Logic.Preprocess.Listings
     public class GitHubPreprocess : ListingPreprocessBase, IListingPreprocess
     {
         private IStopwordsFile stopwords;
-        public GitHubPreprocess(IStopwordsFile stopwords, ITextProcessor processor) : base(processor)
+        public GitHubPreprocess(IStopwordsFile stopwords, ITextProcessor textProcessor) : base(textProcessor)
         {
             this.stopwords = stopwords;
         }
         public HashSet<string> Process(string body)
         {
             var res = new HashSet<string>();
-            var text = Helpers.StripHTML(body);
-            var words = textProcessor.Tokenize(text);
-            foreach (var word in words)
+            var text = Helpers.StripHTML(body).ToLower();
+            //split into sentences
+            var sent = textProcessor.GetSentences(text);
+            foreach (var s in sent)
             {
-                if (!res.Contains(word) && !stopwords.Exists(word))
-                    res.Add(textProcessor.ProcessWord(word));
+                //tokenize
+                var words = textProcessor.Tokenize(s);
+                foreach (var word in words)
+                {
+                    if (!res.Contains(word) && !stopwords.Exists(word))
+                        res.Add(word);
+                    var st = textProcessor.Stem(word);
+                    if (!res.Contains(st) && !stopwords.Exists(st))
+                        res.Add(st);
+                }
             }
             return res;
         }

@@ -5,6 +5,7 @@ namespace ResumeSearch.Web.Migrations
     using ResumeSearch.Web.Core.Logic.Services;
     using ResumeSearch.Web.Security;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.IO;
@@ -33,8 +34,16 @@ namespace ResumeSearch.Web.Migrations
             //stopwords
             var lines = File.ReadAllLines(@"C:\Users\brentkuz\Source\Repos\resume-search\ResumeSearch.Web\stopwords.txt");
             int i = 1;
+            var exists = new HashSet<string>();
             foreach (var l in lines)
-                context.Stopwords.Add(new Stopword() { Id = i++, Word = l, Created = DateTime.Now, Modified = DateTime.Now });
+            {
+                if (!exists.Contains(l))
+                {
+                    context.Stopwords.Add(new Stopword() { Id = i++, Word = l, Created = DateTime.Now, Modified = DateTime.Now });
+                    exists.Add(l);
+                }
+            }
+
 
             context.SaveChanges();
         }

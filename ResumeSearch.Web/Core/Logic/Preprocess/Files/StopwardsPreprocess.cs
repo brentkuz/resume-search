@@ -22,7 +22,7 @@ namespace ResumeSearch.Web.Core.Logic.Preprocess.Files
             {
                 var word = reader.ReadLine();
                 if (!res.Contains(word))
-                    res.Add(word);
+                    res.Add(word.ToLower());
             }
             return res;
         }

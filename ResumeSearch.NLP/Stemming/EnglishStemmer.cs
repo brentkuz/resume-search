@@ -9,10 +9,14 @@ namespace ResumeSearch.NLP.Stemming
 {
     public class EnglishStemmer : IStemmer
     {
-        public string Stem(string word)
+        private Accord.MachineLearning.Text.Stemmers.EnglishStemmer stemmer;
+        public EnglishStemmer()
         {
-            var stem = new EnglishStemmer();
-            return stem.Stem(word);
+            stemmer = new Accord.MachineLearning.Text.Stemmers.EnglishStemmer();
+        }
+        public string Stem(string word)
+        {            
+            return stemmer.Stem(word);
         }
     }
 }

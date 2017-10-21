@@ -24,7 +24,7 @@ namespace ResumeSearch.Web.Controllers
         {
             var vm = new SearchVM();
             ViewData.TemplateInfo.HtmlFieldPrefix = "Search";
-            return View("~/Views/Search/SearchPartial.cshtml", vm);
+            return PartialView("~/Views/Search/SearchPartial.cshtml", vm);
         }
 
         [HttpPost]

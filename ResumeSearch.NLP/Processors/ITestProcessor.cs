@@ -11,6 +11,5 @@ namespace ResumeSearch.NLP.Processors
         List<string> GetSentences(string text);
         List<string> Tokenize(string text);
         string Stem(string word);      
-        List<string> ProcessText(string text);
     }
 }

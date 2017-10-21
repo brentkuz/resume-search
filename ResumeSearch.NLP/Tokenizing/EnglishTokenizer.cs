@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ResumeSearch.NLP.Tokenizing
@@ -23,7 +24,8 @@ namespace ResumeSearch.NLP.Tokenizing
             if (string.IsNullOrEmpty(modelPath) || !File.Exists(modelPath))
                 throw new Exception("Failed to access NLP tokenizer model");
             
-            return tok.Tokenize(text);
+            var tmp = tok.Tokenize(text);
+            return tmp.Where(x => Regex.IsMatch(x, @"[\w\s]")).ToList();
         }
 
 

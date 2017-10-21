@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace ResumeSearch.Web.Core.JobAPIs.APIs
 {
@@ -21,9 +22,9 @@ namespace ResumeSearch.Web.Core.JobAPIs.APIs
         }
         public async Task<List<GitHubJob>> Search(string search, string location, bool fullTime)
         {            
-            var url = baseUrl + "?" + BuildQueryString(search, location, fullTime);
+            var url = Uri.EscapeUriString(baseUrl + "?" + BuildQueryString(search, location, fullTime));
             using (var http = new HttpClient())
-            using(HttpResponseMessage response = await http.GetAsync(Uri.EscapeUriString(url)))
+            using(HttpResponseMessage response = await http.GetAsync(url))
             {
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
@@ -35,12 +36,12 @@ namespace ResumeSearch.Web.Core.JobAPIs.APIs
         {
             StringBuilder sb = new StringBuilder();
             if (search != null && search != string.Empty)            
-                sb.Append("description=" + search);
+                sb.Append("description=" + HttpUtility.UrlEncode(search));
             if (location != null && location != string.Empty)
             {
                 if (sb.ToString() != string.Empty)
                     sb.Append("&");
-                sb.Append("location=" + location);
+                sb.Append("location=" + HttpUtility.UrlEncode(location));
             }
             if (fullTime == true)
             {
