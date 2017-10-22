@@ -8,10 +8,11 @@
 <form>
     <div class="row">
         <span class="col-sm-6">
-            @Html.TextBoxFor(m => m.Content, new { id = "uploadControl", type = "file", accept = ".txt,.doc,.docx" })
+            @Html.TextBoxFor(m => m.Content, new { id = "uploadControl", type = "file", accept = ".txt,.doc,.docx"})
+            <span id="uploadMessage" class="alert alert-danger notification-alert" style="display:none;"></span>
         </span>
         <span class="col-sm-6">
-            @Html.TextAreaFor(m => m.Description, new { name = "Description", @class = "form-control", placeholder = "Description..." })
+            @Html.TextAreaFor(m => m.Description, new { name = "Description", @class = "form-control", placeholder = "Description..." })            
         </span>
     </div>
     <div class="row">
@@ -20,7 +21,6 @@
         </span>
     </div>
 </form>
-
 
 
 <script type="text/javascript">

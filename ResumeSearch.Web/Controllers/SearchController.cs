@@ -32,19 +32,33 @@ namespace ResumeSearch.Web.Controllers
         {
             try
             {
-                var selected = resumes.Where(r => r.IsChecked).Select(x => x.Id).Single();
-                var listings = await searchService.SearchListings(selected, search.Phrase, search.Location, search.IsFullTime);
-                var listingsVM = new List<ListingVM>();
-
-                foreach (var l in listings)
-                    listingsVM.Add(new ListingVM(l));
-
-                var vm = new SearchResultVM()
+                SearchResultVM vm = new SearchResultVM();
+                if (ModelState.IsValid && resumes.Count > 0)
                 {
-                    Count = listings.Count,
-                    Listings = listingsVM
-                };
-                return PartialView("~/Views/Search/SearchResultPartial.cshtml", vm);
+                    var selected = resumes.Where(r => r.IsChecked).Select(x => x.Id).Single();
+                    var listings = await searchService.SearchListings(selected, search.Phrase, search.Location, search.IsFullTime);
+                    var listingsVM = new List<ListingVM>();
+
+                    foreach (var l in listings)
+                        listingsVM.Add(new ListingVM(l));
+
+                    vm = new SearchResultVM()
+                    {
+                        Count = listings.Count,
+                        Listings = listingsVM
+                    };
+                }
+                else
+                {
+                    vm.Notification = new NotificationVM()
+                    {
+                        Message = "Please complete steps 1 and 2",
+                        Type = NotificationType.Error
+                    };
+                }
+
+                return PartialView("~/Views/Search/SearchResultPartial.cshtml", vm);                
+           
             }
             catch(Exception ex)
             {

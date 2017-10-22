@@ -1,9 +1,10 @@
 ﻿
 
-my.resumeListPartial = (function (util) {
+my.resumeListPartial = (function (util, index) {
     if (!util)
         console.log("my.utility is not loaded");
-
+    if (!index)
+        console.log("my.index is not loaded");
 
     
 
@@ -33,11 +34,15 @@ my.resumeListPartial = (function (util) {
 
     function check(el, id) {
         if (el.checked == true) {
+            index.selected(true);
             //uncheck others  
             $(".resumeChk").each((i, e) => {
                 if (e !== el)
                     $(e).prop("checked", false);
             });
+        }
+        else {
+            index.selected(false);
         }
     };   
 
@@ -49,4 +54,4 @@ my.resumeListPartial = (function (util) {
         check: check
     };
 
-})(my.utility);
+})(my.utility, my.index);

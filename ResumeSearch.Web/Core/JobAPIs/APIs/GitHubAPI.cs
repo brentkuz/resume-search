@@ -22,6 +22,7 @@ namespace ResumeSearch.Web.Core.JobAPIs.APIs
         }
         public async Task<List<GitHubJob>> Search(string search, string location, bool fullTime)
         {            
+            
             var url = Uri.EscapeUriString(baseUrl + "?" + BuildQueryString(search, location, fullTime));
             using (var http = new HttpClient())
             using(HttpResponseMessage response = await http.GetAsync(url))
@@ -36,12 +37,12 @@ namespace ResumeSearch.Web.Core.JobAPIs.APIs
         {
             StringBuilder sb = new StringBuilder();
             if (search != null && search != string.Empty)            
-                sb.Append("description=" + HttpUtility.UrlEncode(search));
+                sb.Append("description=" + EncodeSpecialCharacters(search));
             if (location != null && location != string.Empty)
             {
                 if (sb.ToString() != string.Empty)
                     sb.Append("&");
-                sb.Append("location=" + HttpUtility.UrlEncode(location));
+                sb.Append("location=" + EncodeSpecialCharacters(location));
             }
             if (fullTime == true)
             {

@@ -42,30 +42,35 @@ namespace ResumeSearch.Web.Controllers
             return PartialView("~/Views/Resume/UploadPartial.cshtml", vm);
         }
         [HttpPost]
-        public ActionResult Upload()
+        public ActionResult Upload(UploadVM upload)
         {
             try
             {
-                HttpPostedFileBase myFile = Request.Files[0];
-                var title = myFile.FileName;
-                var desc = Request.Form["Description"];
-                bool isUploaded = true;
+                if(ModelState.IsValid)
+                {                
+                    bool isUploaded = false;
 
-                if (myFile != null)
-                {
-                    isUploaded = resumeService.UploadResume(User.Identity.Name, title, desc, myFile);
-                }
-
-                var vm = new UploadVM()
-                {
-                    Notification = new NotificationVM()
+                    if (upload.Content != null)
                     {
-                        Message = isUploaded ? "Success" : "Resume upload failed",
-                        Type = isUploaded ? NotificationType.Success : NotificationType.Error
+                        isUploaded = resumeService.UploadResume(User.Identity.Name, upload.Content.FileName, upload.Description, upload.Content);
                     }
-                };
 
-                return PartialView("~/Views/Resume/UploadPartial.cshtml", vm);
+                    var vm = new UploadVM()
+                    {
+                        Notification = new NotificationVM()
+                        {
+                            Message = isUploaded ? "Success" : "Resume upload failed",
+                            Type = isUploaded ? NotificationType.Success : NotificationType.Error
+                        }
+                    };
+
+                    return PartialView("~/Views/Resume/UploadPartial.cshtml", vm);
+                }
+                else
+                {
+                    return PartialView("~/Views/Resume/UploadPartial.cshtml", upload);
+                }
+                
             }
             catch(Exception ex)
             {

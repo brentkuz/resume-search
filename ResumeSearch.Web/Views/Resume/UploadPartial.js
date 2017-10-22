@@ -1,13 +1,19 @@
 ﻿//Module for UploadPartial.cshtml
 
-my.uploadPartial = (function (util, resumeList) {
+my.uploadPartial = (function (util) {
     // jqXHRData needed for grabbing by data object of fileupload scope
     var jqXHRData;
 
     if (!util)
         console.log("my.utility not loaded");
-    if (!resumeList)
-        console.log("my.resumeList not loaded");
+
+    function notify(message) {
+        if (message != undefined) {
+            $("#uploadMessage").text("Select a file").show();
+        } else {
+            $("#uploadMessage").text("").hide();
+        }
+    }
 
     //init view
     function init() {
@@ -15,11 +21,17 @@ my.uploadPartial = (function (util, resumeList) {
         initSimpleFileUpload();
 
         //Handler for "Start upload" button 
-        $("#uploadBtn").on('click', function () {    
-            util.block("#resumeUpload", true);
+        $("#uploadBtn").on('click', function () {
+            notify();
             if (jqXHRData) {
+                console.log("start upload");
+                util.block("#resumeUpload", true);
                 jqXHRData.submit();
+            } else {
+                console.log("no file");
+                notify("Select a file");
             }
+
             return false;
         });
     };
@@ -27,13 +39,13 @@ my.uploadPartial = (function (util, resumeList) {
     //bind jquery file upload to control
     function initSimpleFileUpload() {
         'use strict';
-
         $('#uploadControl').fileupload({
             url: '/Resume/Upload',
             dataType: 'html',
             replaceFileInput: false,
             add: function (e, data) {
-                jqXHRData = data
+                jqXHRData = data;
+                notify();
             },
             done: function (event, data) {                
                 $("#resumeUpload").html(data.result);  
@@ -53,4 +65,4 @@ my.uploadPartial = (function (util, resumeList) {
     return {
         init: init
     }
-})(my.utility, my.resumeListPartial);
+})(my.utility);

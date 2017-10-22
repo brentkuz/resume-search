@@ -24,6 +24,7 @@ namespace ResumeSearch.Web
                         "~/Scripts/app/app.js",
                         "~/Views/Account/CreateUser.js",
                         "~/Views/Resume/UploadPartial.js",
+                        "~/Views/Dashboard/Index.js",
                         "~/Views/Resume/ResumeListPartial.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

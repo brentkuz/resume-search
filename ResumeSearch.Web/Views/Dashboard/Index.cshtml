@@ -4,14 +4,14 @@
 }
 
 @using (Ajax.BeginForm("Search", "Search", new AjaxOptions()
-    {
-        HttpMethod = "POST",
-        InsertionMode = InsertionMode.Replace,
-        OnBegin = "my.utility.block('#searchResults', true)",
-        OnComplete = "my.utility.block('#searchResults', false)",
-        UpdateTargetId = "searchResults"
-    }))
-    {
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "my.utility.block('#searchResults', true)",
+    OnComplete = "my.utility.block('#searchResults', false)",
+    UpdateTargetId = "searchResults"
+}))
+{
         <div>
             <div class="row">
                 <div class="col-sm-7">
@@ -32,8 +32,8 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <h4>Step 3: Click "Search"</h4>
-                    <input type="submit" value="Search" />
+                    <h4 class="inline-block">Step 3: Click</h4>
+                    <input type="submit" class="btn btn-primary" value="Search" @*onclick="my.index.submit()"*@/>
                 </div>
             </div>
         </div>
@@ -42,3 +42,7 @@
 <div id="searchResults">
     
 </div>
+
+<script type="text/javascript">
+    my.index.init();
+</script>

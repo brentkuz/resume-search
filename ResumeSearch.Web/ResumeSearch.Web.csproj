@@ -320,6 +320,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="stopwords.txt" />
     <Content Include="Views\Account\CreateUser.js" />
+    <Content Include="Views\Dashboard\Index.js" />
     <Content Include="Views\Resume\ResumeListPartial.js" />
     <Content Include="Views\Resume\UploadPartial.js" />
     <Content Include="Web.config" />

@@ -1,15 +1,27 @@
 ﻿@model ResumeSearch.Web.Models.SearchResultVM
 
-<div>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Count)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Count)
-        </dd>
-    </dl>
-    @Html.Partial("~/Views/Search/ListingsListPartial.cshtml", Model.Listings)
+<div class="row">
+    <div class="col-sm-12">
+        @Html.Partial("~/Views/Shared/NotificationPartial.cshtml", Model.Notification)
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Count)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Count)
+            </dd>
+        </dl>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        @Html.Partial("~/Views/Search/ListingsListPartial.cshtml", Model.Listings)
+    </div>
 </div>
 

@@ -1,6 +1,24 @@
 ﻿@model ResumeSearch.Web.Models.NotificationVM
 
+@if (!string.IsNullOrWhiteSpace(Model.Message))
+{
+    if (Model.Type == ResumeSearch.Web.Models.NotificationType.Error)
+    {
+        <span class="alert alert-danger notification-alert">@Model.Message</span>
+    }
+    else if (Model.Type == ResumeSearch.Web.Models.NotificationType.Success)
+    {
+        <span class="alert alert-success notification-alert">@Model.Message</span>
+    }
+    else if (Model.Type == ResumeSearch.Web.Models.NotificationType.Info)
+    {
+        <span class="alert alert-info notification-alert">@Model.Message</span>
+    }
+    else
+    {
+        @Html.DisplayFor(m => m.Message)
+    }
+}
 
-@Html.DisplayFor(model => model.Message)
 
 
