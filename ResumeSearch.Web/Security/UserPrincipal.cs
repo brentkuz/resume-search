@@ -1,4 +1,5 @@
-﻿using ResumeSearch.Web.Core.Data.Entities;
+﻿using ResumeSearch.Crosscutting.Entities;
+using ResumeSearch.Crosscutting.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,7 @@ using System.Threading.Tasks;
 
 namespace ResumeSearch.Web.Security
 {
-    public enum Role
-    {
-        Applicant = 0
-    }
+
     public class UserPrincipal : IPrincipal
     {
         public UserPrincipal()

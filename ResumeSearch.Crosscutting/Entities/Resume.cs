@@ -1,11 +1,11 @@
-﻿using ResumeSearch.Web.Core.Logic.BusinessObjects.Files;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace ResumeSearch.Web.Core.Data.Entities
+namespace ResumeSearch.Crosscutting.Entities
 {
     [Table("Resumes")]
     public class Resume : EntityBase

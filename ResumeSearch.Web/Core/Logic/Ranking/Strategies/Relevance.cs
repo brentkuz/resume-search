@@ -20,7 +20,7 @@ namespace ResumeSearch.Web.Core.Logic.Ranking.Strategies
                 foreach (var w in resume.Words)
                     if (l.Words.Contains(w))
                         matchCnt++;
-                l.PercentMatch = Math.Round(Convert.ToDecimal(matchCnt) / Convert.ToDecimal(l.Words.Count), 2);
+                l.PercentMatch = Math.Round(Convert.ToDecimal(matchCnt) / Convert.ToDecimal(l.Words.Count), 4);
             }
             return listings.OrderByDescending(x => x.PercentMatch).ToList();
         }

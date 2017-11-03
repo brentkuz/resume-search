@@ -1,5 +1,5 @@
 ﻿
-using ResumeSearch.Web.Security;
+using ResumeSearch.Crosscutting.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace ResumeSearch.Web.Core.Data.Entities
+namespace ResumeSearch.Crosscutting.Entities
 {
     [Table("Users")]
     public class User : EntityBase
@@ -15,13 +15,13 @@ namespace ResumeSearch.Web.Core.Data.Entities
         public User()
         {
         }
-        public User(UserPrincipal user)
+        public User(string username, string password, string salt, string email, Role role)
         {
-            Username = user.Username;
-            Password = user.Password;
-            Salt = user.Salt;
-            Email = user.Email;
-            Role = user.Role;
+            Username = username;
+            Password = password;
+            Salt = salt;
+            Email = email;
+            Role = role;
         }
         [Index(IsUnique = true)]
         [MaxLength(100)]

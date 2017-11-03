@@ -42,6 +42,12 @@
     <Reference Include="Castle.Core, Version=4.1.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.1.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -70,6 +76,7 @@
       <HintPath>..\packages\Moq.4.7.127\lib\net45\Moq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -102,6 +109,7 @@
     <Compile Include="Integration\Files\Resume_Test.cs" />
     <Compile Include="NLP\Utility_Test.cs" />
     <Compile Include="Security\SecurityHelpers_Test.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="Unit\NLP\TextProcessor_Test.cs" />
     <Compile Include="Integration\DocumentReaders\WordDocumentReader_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,6 +129,14 @@
     <Content Include="stopwords.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ResumeSearch.Crosscutting\ResumeSearch.Crosscutting.csproj">
+      <Project>{fdd7b397-f403-426a-a599-092b9414d003}</Project>
+      <Name>ResumeSearch.Crosscutting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ResumeSearch.Data\ResumeSearch.Data.csproj">
+      <Project>{9993136a-da35-4403-a164-3c7022b497bf}</Project>
+      <Name>ResumeSearch.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ResumeSearch.NLP\ResumeSearch.NLP.csproj">
       <Project>{943dde21-b97a-4066-9841-899883ac0df6}</Project>
       <Name>ResumeSearch.NLP</Name>

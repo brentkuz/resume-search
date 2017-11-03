@@ -1,11 +1,11 @@
-﻿using ResumeSearch.Web.Core.Data.Contexts;
-using ResumeSearch.Web.Core.Data.Entities;
+﻿using ResumeSearch.Data.Contexts;
+using ResumeSearch.Crosscutting.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ResumeSearch.Web.Core.Data.Repositories
+namespace ResumeSearch.Data.Repositories
 {
     public class RepositoryBase
     {

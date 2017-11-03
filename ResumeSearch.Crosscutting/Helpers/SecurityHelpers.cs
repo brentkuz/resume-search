@@ -3,7 +3,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace ResumeSearch.Web.Security
+namespace ResumeSearch.Crosscutting.Security
 {
     public static class SecurityHelpers
     {

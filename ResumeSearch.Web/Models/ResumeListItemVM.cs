@@ -1,4 +1,4 @@
-﻿using ResumeSearch.Web.Core.Data.Entities;
+﻿using ResumeSearch.Crosscutting.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

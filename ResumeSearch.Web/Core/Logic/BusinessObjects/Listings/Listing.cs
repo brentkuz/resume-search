@@ -4,6 +4,7 @@ using ResumeSearch.Web.Core.Logic.Preprocess;
 using ResumeSearch.Web.Core.Logic.Preprocess.Listings;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace ResumeSearch.Web.Core.Logic.BusinessObjects.Listings
         private HashSet<string> words;
 
         //Github 
-        public Listing(GitHubJob job, GitHubPreprocess preprocess)
+        public Listing(GitHubJob job, IListingPreprocess preprocess)
         {
             source = ListingSource.Github;
             words = new HashSet<string>();
@@ -30,8 +31,8 @@ namespace ResumeSearch.Web.Core.Logic.BusinessObjects.Listings
             Body = job.Body;
             Company = job.Company;
             //TODO: figure out weird UTC format conversion - "Wed Oct 04 17:48:47 UTC 2017"
-            //Date = job.Date != "" ? Convert.ToDateTime(job.Date) : null;
-
+            //Date = DateTime.ParseExact(job.Date, "ddd MMM dd hh:mm:ss zzz yyyy", new CultureInfo("en-US"), DateTimeStyles.None); 
+            Date = new DateTime();
             words = preprocess.Process(Body);
         }
 

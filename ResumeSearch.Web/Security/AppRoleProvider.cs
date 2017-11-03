@@ -1,4 +1,4 @@
-﻿using ResumeSearch.Web.Core.Data;
+﻿using ResumeSearch.Data;
 using ResumeSearch.Web.Core.Logic.BusinessObjects;
 using ResumeSearch.Web.Core.Logic.Services;
 using System;

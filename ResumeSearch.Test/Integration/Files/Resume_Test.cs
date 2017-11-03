@@ -11,6 +11,7 @@ using ResumeSearch.NLP.Processors;
 using ResumeSearch.NLP.SentenceDetection;
 using ResumeSearch.NLP.Tokenizing;
 using ResumeSearch.NLP.Stemming;
+using ResumeSearch.Crosscutting.Enums;
 
 namespace ResumeSearch.Test.Integration.Files
 {

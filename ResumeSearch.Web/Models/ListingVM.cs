@@ -14,7 +14,7 @@ namespace ResumeSearch.Web.Models
         public ListingVM(Listing listing)
         {
             Source = listing.Source.ToString();
-            PercentMatch = (listing.PercentMatch * 100) + "%";
+            PercentMatch = (Math.Round(listing.PercentMatch * 100, 2)) + "%";
             Url = listing.Url;
             Title = listing.Title;
             Location = listing.Location;

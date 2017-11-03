@@ -1,6 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
-using ResumeSearch.Web.Core.Data;
-using ResumeSearch.Web.Core.Data.Repositories;
+using ResumeSearch.Data;
+using ResumeSearch.Data.Repositories;
 using ResumeSearch.Web.Core.JobAPIs.APIs;
 using ResumeSearch.Web.Core.Logic.BusinessObjects.Files;
 using ResumeSearch.Web.Core.Logic.DocumentReaders;

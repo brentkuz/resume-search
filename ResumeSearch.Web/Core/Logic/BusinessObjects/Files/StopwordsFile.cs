@@ -1,5 +1,6 @@
-﻿using ResumeSearch.NLP;
-using ResumeSearch.Web.Core.Data.Entities;
+﻿using ResumeSearch.Crosscutting.Entities;
+using ResumeSearch.Crosscutting.Enums;
+using ResumeSearch.NLP;
 using ResumeSearch.Web.Core.Logic.DocumentReaders;
 using ResumeSearch.Web.Core.Logic.Preprocess;
 using ResumeSearch.Web.Core.Logic.Preprocess.Files;

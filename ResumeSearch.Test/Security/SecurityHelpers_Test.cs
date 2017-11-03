@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ResumeSearch.Web.Security;
+using ResumeSearch.Crosscutting.Security;
 
 namespace ResumeSearch.Test.Security
 {

@@ -1,4 +1,5 @@
-﻿using ResumeSearch.Web.Core.Data;
+﻿using ResumeSearch.Crosscutting.Enums;
+using ResumeSearch.Data;
 using ResumeSearch.Web.Core.JobAPIs.APIs;
 using ResumeSearch.Web.Core.Logic.BusinessObjects.Files;
 using ResumeSearch.Web.Core.Logic.BusinessObjects.Listings;

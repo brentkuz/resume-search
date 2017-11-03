@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace ResumeSearch.Web.Core.Data.Entities
+namespace ResumeSearch.Crosscutting.Entities
 {
     [Table("Keywords")]
     public class Keyword : EntityBase

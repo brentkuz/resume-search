@@ -1,6 +1,6 @@
-﻿using ResumeSearch.Web.Core.Data;
-using ResumeSearch.Web.Core.Data.Entities;
-using ResumeSearch.Web.Core.Data.Repositories;
+﻿using ResumeSearch.Data;
+using ResumeSearch.Crosscutting.Entities;
+using ResumeSearch.Data.Repositories;
 using ResumeSearch.Web.Core.Logic.BusinessObjects.Files;
 using ResumeSearch.Web.Core.Logic.DocumentReaders;
 using ResumeSearch.Web.Core.Logic;
@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ResumeSearch.Crosscutting.Enums;
 
 namespace ResumeSearch.Web.Core.Logic.Services
 {

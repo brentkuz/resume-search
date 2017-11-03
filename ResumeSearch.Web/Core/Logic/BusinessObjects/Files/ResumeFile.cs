@@ -9,8 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
-using ResumeSearch.Web.Core.Data.Entities;
 using ResumeSearch.NLP;
+using ResumeSearch.Crosscutting.Entities;
+using ResumeSearch.Crosscutting.Enums;
 
 namespace ResumeSearch.Web.Core.Logic.BusinessObjects.Files
 {

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ResumeSearch.NLP.Processors;
 using ResumeSearch.NLP;
+using ResumeSearch.Crosscutting.Enums;
 
 namespace ResumeSearch.Web.Core.Logic.Preprocess.Files
 {    

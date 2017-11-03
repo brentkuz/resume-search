@@ -1,5 +1,6 @@
-﻿using ResumeSearch.Web.Core.Data;
-using ResumeSearch.Web.Core.Data.Entities;
+﻿using ResumeSearch.Crosscutting.Entities;
+using ResumeSearch.Crosscutting.Security;
+using ResumeSearch.Data;
 using ResumeSearch.Web.Core.Logic.Utility;
 using ResumeSearch.Web.Security;
 using System;
@@ -44,7 +45,7 @@ namespace ResumeSearch.Web.Core.Logic.Services
         }
         public bool AddUser(UserPrincipal user)
         {  
-            uow.UserRepository.InsertUser(new User(user));
+            uow.UserRepository.InsertUser(new User(user.Username, user.Password, user.Salt, user.Email, user.Role));
             return uow.Save(); 
         }
 

@@ -1,4 +1,4 @@
-﻿using ResumeSearch.Web.Core.Data;
+﻿using ResumeSearch.Data;
 using ResumeSearch.Web.Core.Logic.BusinessObjects.Files;
 using ResumeSearch.Web.Core.Logic.BusinessObjects.Listings;
 using ResumeSearch.Web.Core.Logic.Ranking;

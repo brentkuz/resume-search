@@ -1,11 +1,11 @@
-﻿using ResumeSearch.Web.Core.Data.Contexts;
-using ResumeSearch.Web.Core.Data.Repositories;
+﻿using ResumeSearch.Data.Contexts;
+using ResumeSearch.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ResumeSearch.Web.Core.Data
+namespace ResumeSearch.Data
 {
     public interface IUnitOfWork : IDisposable
     {

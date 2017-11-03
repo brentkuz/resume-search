@@ -1,4 +1,5 @@
-﻿using ResumeSearch.Web.Core.Logic.BusinessObjects.Files;
+﻿using ResumeSearch.Crosscutting.Enums;
+using ResumeSearch.Web.Core.Logic.BusinessObjects.Files;
 using System;
 using System.Collections.Generic;
 using System.Linq;

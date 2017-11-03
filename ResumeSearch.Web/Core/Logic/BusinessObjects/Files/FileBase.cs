@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ResumeSearch.Crosscutting.Enums;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,14 +8,8 @@ using System.Threading.Tasks;
 
 namespace ResumeSearch.Web.Core.Logic.BusinessObjects.Files
 {
-    public enum DocumentType
-    {
-        Text, Word, Bytes, Set
-    }
-    public enum FileType
-    {
-        Resume, Stopwords
-    }
+
+
     public abstract class FileBase
     {
         private readonly DocumentType documentType;

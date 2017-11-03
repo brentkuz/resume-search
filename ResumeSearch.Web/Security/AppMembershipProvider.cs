@@ -1,5 +1,6 @@
 ﻿
-using ResumeSearch.Web.Core.Data;
+using ResumeSearch.Crosscutting.Security;
+using ResumeSearch.Data;
 using ResumeSearch.Web.Core.Logic.Services;
 using System;
 using System.Collections.Generic;

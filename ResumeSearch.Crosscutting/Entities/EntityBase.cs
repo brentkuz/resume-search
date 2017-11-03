@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace ResumeSearch.Web.Core.Data.Entities
+namespace ResumeSearch.Crosscutting.Entities
 {
     public abstract class EntityBase
     {
