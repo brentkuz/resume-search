@@ -1,11 +1,13 @@
 ﻿//Module for UploadPartial.cshtml
 
-my.uploadPartial = (function (util) {
+my.uploadPartial = (function (util, resumeList) {
     // jqXHRData needed for grabbing by data object of fileupload scope
     var jqXHRData;
 
     if (!util)
         console.log("my.utility not loaded");
+    if (!resumeList)
+        console.log("my.resumeListPartial not loaded")
 
     function notify(message) {
         if (message != undefined) {
@@ -51,7 +53,7 @@ my.uploadPartial = (function (util) {
                 $("#resumeUpload").html(data.result);  
                 util.block("#resumeUpload", false);
                 //refresh list
-                my.resumeListPartial.getList();
+                resumeList.getList();
 
             },
             fail: function (event, data) {
@@ -65,4 +67,4 @@ my.uploadPartial = (function (util) {
     return {
         init: init
     }
-})(my.utility);
+})(my.utility, my.resumeListPartial);

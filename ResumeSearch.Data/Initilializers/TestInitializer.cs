@@ -37,7 +37,7 @@ namespace ResumeSearch.Data.Initilializers
             var user = new User()
             {
                 Username = "brentkuz",
-                Password = SecurityHelpers.EncryptPassword("btk1987", salt),
+                Password = SecurityHelpers.EncryptPassword("test123", salt),
                 Salt = salt,
                 Email = "brentkuzmanich@gmail.com",
                 Role = Crosscutting.Enums.Role.Applicant

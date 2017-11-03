@@ -15,25 +15,31 @@
         <div>
             <div class="row">
                 <div class="col-sm-7">
-                    <h4>Step 1: Upload resume(s) and check which one to search on</h4>
-                    <div id="resumeUpload">
-                        @{Html.RenderAction("GetUpload", "Resume");}
-                    </div>
-                    <div id="resumeList">
-                        @{Html.RenderAction("GetResumes", "Resume");}
+                    <div class="radius dash-component green-back">
+                        <h4>Step 1: Upload resume(s) and check which one to search on</h4>
+                        <div id="resumeUpload">
+                            @{Html.RenderAction("GetUpload", "Resume");}
+                        </div>
+                        <div id="resumeList">
+                            @{Html.RenderAction("GetResumes", "Resume");}
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-5">
-                    <h4>Step 2: Enter search criteria</h4>
-                    <div id="search">
-                        @{Html.RenderAction("GetSearch", "Search");}
+                    <div class="radius dash-component blue-back">
+                        <h4>Step 2: Enter search criteria</h4>
+                        <div id="search">
+                            @{Html.RenderAction("GetSearch", "Search");}
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12">
-                    <h4 class="inline-block">Step 3: Click</h4>
-                    <input type="submit" class="btn btn-primary" value="Search" @*onclick="my.index.submit()"*@/>
+                <div class="col-sm-12 ">
+                    <div class="radius dash-component ">
+                        <h4 class="inline-block">Step 3: Click</h4>
+                        <input type="submit" class="btn btn-primary" value="Search" />
+                    </div>
                 </div>
             </div>
         </div>

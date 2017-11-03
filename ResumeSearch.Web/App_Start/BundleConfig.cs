@@ -22,10 +22,10 @@ namespace ResumeSearch.Web
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                         "~/Scripts/app/app.js",
-                        "~/Views/Account/CreateUser.js",
-                        "~/Views/Resume/UploadPartial.js",
+                        "~/Views/Account/CreateUser.js",                        
                         "~/Views/Dashboard/Index.js",
-                        "~/Views/Resume/ResumeListPartial.js"));
+                        "~/Views/Resume/ResumeListPartial.js",
+                        "~/Views/Resume/UploadPartial.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.

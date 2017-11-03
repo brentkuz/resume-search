@@ -31,3 +31,19 @@ textarea {
 .inline-block{
     display:inline-block;
 }
+
+.radius{
+    border-radius:5px;
+}
+.dash-component{
+    padding:10px;
+}
+.blue-back {
+    background-color: #d3e4ff;
+}
+.green-back {
+    background-color: #d6ffd3;
+}
+.orange-back {
+    background-color: #ffeed3;
+}
