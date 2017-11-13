@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Author: Brent Kuzmanich
+ * Comment: Static helper methods for NLP.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

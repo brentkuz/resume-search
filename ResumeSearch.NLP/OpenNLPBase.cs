@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * Author: Brent Kuzmanich
+ * Comment: Abstract base class for OpenNLP objects
+ */
 
 namespace ResumeSearch.NLP
 {

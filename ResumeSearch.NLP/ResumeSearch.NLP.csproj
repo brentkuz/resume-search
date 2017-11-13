@@ -65,7 +65,7 @@
   <ItemGroup>
     <Compile Include="Language.cs" />
     <Compile Include="OpenNLPModel.cs" />
-    <Compile Include="Processors\ITestProcessor.cs" />
+    <Compile Include="Processors\ITextProcessor.cs" />
     <Compile Include="Processors\TextProcessorBase.cs" />
     <Compile Include="Processors\TextProcessorFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
